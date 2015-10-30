@@ -1,0 +1,1527 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>内部资料 : ParaSoft C++Test代码静态分析和程序内部测试</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            内部资料 : ParaSoft C++Test代码静态分析和程序内部测试
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on 2013-02-25 by <font color="#0050B2">jianghua</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <p>    
+<div class="office-container">
+<a href="/plugins/servlet/confluence/editinword/2229074/attachments/ParaSoft C++Test代码静态分析.docx" class="confluence-button office-editable" data-use-path-auth="false">Edit Document</a>    <div class="office-document">
+    <div>
+<p style="margin:0pt; orphans:0; text-align:center; widows:0">
+<span style="font-family:Calibri; font-size:24pt; font-weight:bold">C++Test</span>
+<span style="font-family:宋体; font-size:24pt; font-weight:bold">代码静态分析</span>
+</p>
+<p style="margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:宋体; font-size:10.5pt">严庆兵  </span>
+<span style="font-family:Calibri; font-size:10.5pt">2013-2-25</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:-21pt; widows:0">
+<span style="color:#ff0000; font-family:宋体; font-size:16pt; font-weight:bold">一、</span>
+<span style="font:7.0pt 'Times New Roman'"> </span>
+<span style="color:#ff0000; font-family:宋体; font-size:16pt; font-weight:bold">工具介绍</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:10.5pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt">C++ Test</span>
+<span style="font-family:宋体; font-size:10.5pt">是</span>
+<span style="font-family:Calibri; font-size:10.5pt">Parasoft</span>
+<span style="font-family:宋体; font-size:10.5pt">公司出品的一个针对</span>
+<span style="font-family:Calibri; font-size:10.5pt">C/C++</span>
+<span style="font-family:宋体; font-size:10.5pt">源代码进行自动化</span>
+<span style="font-family:宋体; font-size:10.5pt">审查和</span>
+<span style="font-family:宋体; font-size:10.5pt">单元测试的工具。它可以对源代码进行三种测试：白盒测试、黑盒测试以及回归功</span>
+<span style="font-family:宋体; font-size:10.5pt">能</span>
+<span style="font-family:宋体; font-size:10.5pt">测试。</span>
+<span style="font-family:宋体; font-size:10.5pt">对</span>
+<span style="font-family:Calibri; font-size:10.5pt">C++</span>
+<span style="font-family:宋体; font-size:10.5pt">代码进行静态分析和代码覆盖，并检查编码规范。对</span>
+<span style="font-family:Calibri; font-size:10.5pt">C++</span>
+<span style="font-family:宋体; font-size:10.5pt">类自动生成测试用例、驱动模块</span>
+<span style="font-family:Calibri; font-size:10.5pt">/</span>
+<span style="font-family:宋体; font-size:10.5pt">桩模块。</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:10.5pt; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">对于程序员来说可以使用代码静态分析、代码审查、</span>
+<span style="font-family:宋体; font-size:10.5pt">运行期</span>
+<span style="font-family:Calibri; font-size:10.5pt">bug</span>
+<span style="font-family:宋体; font-size:10.5pt">分析、</span>
+<span style="font-family:宋体; font-size:10.5pt">自动白盒测试功能。</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:-21pt; widows:0">
+<span style="color:#ff0000; font-family:宋体; font-size:16pt; font-weight:bold">二、</span>
+<span style="font:7.0pt 'Times New Roman'"> </span>
+<span style="color:#ff0000; font-family:宋体; font-size:16pt; font-weight:bold">安装</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt">C++Test</span>
+<span style="font-family:宋体; font-size:10.5pt">有独立版和插件版</span>
+<span style="font-family:Calibri; font-size:10.5pt">(</span>
+<span style="font-family:宋体; font-size:10.5pt">内嵌到</span>
+<span style="font-family:Calibri; font-size:10.5pt">VS</span>
+<span style="font-family:宋体; font-size:10.5pt">开发环境版本和独立</span>
+<span style="font-family:Calibri; font-size:10.5pt">IDE</span>
+<span style="font-family:宋体; font-size:10.5pt">版本</span>
+<span style="font-family:Calibri; font-size:10.5pt">(</span>
+<span style="font-family:宋体; font-size:10.5pt">还支持</span>
+<span style="font-family:Calibri; font-size:10.5pt">Linux</span>
+<span style="font-family:宋体; font-size:10.5pt">¥</span>
+<span style="font-family:Calibri; font-size:10.5pt">Unix</span>
+<span style="font-family:宋体; font-size:10.5pt">等系统</span>
+<span style="font-family:Calibri; font-size:10.5pt">))</span>
+<span style="font-family:宋体; font-size:10.5pt">。整理了一个破解版本，如下：</span>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt">A.</span>
+<span style="font:7.0pt 'Times New Roman'">     </span>
+<span style="font-family:宋体; font-size:10.5pt">插件版</span>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">下载地址</span>
+<span style="font-family:Calibri; font-size:10.5pt">:</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">传到</span>
+<span style="font-family:Calibri; font-size:10.5pt">skydrive</span>
+<span style="font-family:宋体; font-size:10.5pt">中了</span>
+<span style="font-family:Calibri; font-size:10.5pt">,</span>
+<span style="font-family:宋体; font-size:10.5pt">试试能下载吗</span>
+<span style="font-family:Calibri; font-size:10.5pt">.</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt">https://skydrive.live.com/?cid=CB913F42229744B1&amp;id=CB913F42229744B1!358</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">独立版本破解</span>
+<span style="font-family:Calibri; font-size:10.5pt">:</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">把</span>
+<span style="font-family:Calibri; font-size:10.5pt">lic_client.jar</span>
+<span style="font-family:宋体; font-size:10.5pt">复制到</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt">c:\Program Files (x86)\Parasoft\Test\9.0\plugins\com.parasoft.xtest.libs_9.0.0.20100729\Parasoft\ </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">这个目录下覆盖原始文件</span>
+<span style="font-family:Calibri; font-size:10.5pt">.</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">运行后随便输入几个注册码 可以成功。</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">插件版本破解：</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">把</span>
+<span style="font-family:Calibri; font-size:10.5pt">plugins-c++Test For Visual Studio.7z</span>
+<span style="font-family:宋体; font-size:10.5pt">中的文件覆盖到</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt">c:</span>
+<span style="font-family:宋体; font-size:10.5pt">¥</span>
+<span style="font-family:Calibri; font-size:10.5pt">Program Files (x86)</span>
+<span style="font-family:宋体; font-size:10.5pt">¥</span>
+<span style="font-family:Calibri; font-size:10.5pt">Parasoft</span>
+<span style="font-family:宋体; font-size:10.5pt">¥</span>
+<span style="font-family:Calibri; font-size:10.5pt">C++test for Visual Studio</span>
+<span style="font-family:宋体; font-size:10.5pt">¥</span>
+<span style="font-family:Calibri; font-size:10.5pt">9.2</span>
+<span style="font-family:宋体; font-size:10.5pt">¥</span>
+<span style="font-family:Calibri; font-size:10.5pt">plugins</span>
+<span style="font-family:宋体; font-size:10.5pt">¥ 这个目录中</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">把</span>
+<span style="font-family:Calibri; font-size:10.5pt">plugins-Test for Virsual Studio.7z </span>
+<span style="font-family:宋体; font-size:10.5pt">中的文件覆盖到</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt">c:</span>
+<span style="font-family:宋体; font-size:10.5pt">¥</span>
+<span style="font-family:Calibri; font-size:10.5pt">Program Files (x86)</span>
+<span style="font-family:宋体; font-size:10.5pt">¥</span>
+<span style="font-family:Calibri; font-size:10.5pt">Parasoft</span>
+<span style="font-family:宋体; font-size:10.5pt">¥</span>
+<span style="font-family:Calibri; font-size:10.5pt">Test for Visual Studio</span>
+<span style="font-family:宋体; font-size:10.5pt">¥</span>
+<span style="font-family:Calibri; font-size:10.5pt">9.2</span>
+<span style="font-family:宋体; font-size:10.5pt">¥</span>
+<span style="font-family:Calibri; font-size:10.5pt">plugins</span>
+<span style="font-family:宋体; font-size:10.5pt">这个目录中</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">运行</span>
+<span style="font-family:Calibri; font-size:10.5pt">ide</span>
+<span style="font-family:宋体; font-size:10.5pt">随便输如几个注册码 可以成功</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt">concerto</span>
+<span style="font-family:宋体; font-size:10.5pt">破解</span>
+<span style="font-family:Calibri; font-size:10.5pt">:</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">安装后把</span>
+<span style="font-family:Calibri; font-size:10.5pt">xtest.lic.client-for concerto.jar</span>
+<span style="font-family:宋体; font-size:10.5pt">改名为</span>
+<span style="font-family:Calibri; font-size:10.5pt">:xtest.lic.client.jar </span>
+<span style="font-family:宋体; font-size:10.5pt">然后覆盖到</span>
+<span style="font-family:Calibri; font-size:10.5pt">tomcat/lib(</span>
+<span style="font-family:宋体; font-size:10.5pt">好像是这个目录</span>
+<span style="font-family:Calibri; font-size:10.5pt">,</span>
+<span style="font-family:宋体; font-size:10.5pt">可以搜索下这个文件</span>
+<span style="font-family:Calibri; font-size:10.5pt">). </span>
+<span style="font-family:宋体; font-size:10.5pt">运行浏览器</span>
+<span style="font-family:Calibri; font-size:10.5pt">,</span>
+<span style="font-family:宋体; font-size:10.5pt">打开网页</span>
+<span style="font-family:Calibri; font-size:10.5pt">,</span>
+<span style="font-family:宋体; font-size:10.5pt">随便输入</span>
+<span style="font-family:Calibri; font-size:10.5pt">key</span>
+<span style="font-family:宋体; font-size:10.5pt">就可以</span>
+<span style="font-family:Calibri; font-size:10.5pt">.</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt">       B</span>
+<span style="font-family:宋体; font-size:10.5pt">．破解独立版本</span>
+</p>
+<p style="margin:0pt 0pt 0pt 47.25pt; orphans:0; text-align:justify; text-indent:-5.25pt; widows:0">
+<span style="font-family:宋体; font-size:10.5pt"> </span>
+<span style="font-family:Calibri; font-size:10.5pt">Parasoft C Plus Plus Test v6.0.0.5 </span>
+<span style="font-family:宋体; font-size:10.5pt">英文版</span>
+<span style="font-family:Calibri; font-size:10.5pt">(</span>
+<span style="font-family:宋体; font-size:10.5pt">从</span>
+<span style="font-family:Calibri; font-size:10.5pt">CSDN</span>
+<span style="font-family:宋体; font-size:10.5pt">下载</span>
+<span style="font-family:Calibri; font-size:10.5pt">)</span>
+<span style="font-family:宋体; font-size:10.5pt">，安装后，将</span>
+<span style="font-family:Calibri; font-size:10.5pt">toolkit.dll</span>
+<span style="font-family:宋体; font-size:10.5pt">文件替换到安装目录，即破解。</span>
+</p>
+<p style="margin:0pt 0pt 0pt 47.25pt; orphans:0; text-align:justify; text-indent:-5.25pt; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; text-indent:-21pt; widows:0">
+<span style="color:#ff0000; font-family:宋体; font-size:16pt; font-weight:bold">三、</span>
+<span style="font:7.0pt 'Times New Roman'"> </span>
+<span style="color:#ff0000; font-family:宋体; font-size:16pt; font-weight:bold">静态分析和代码审查</span>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0">
+<span style="color:#00b050; font-family:Calibri; font-size:14pt; font-weight:bold">A.</span>
+<span style="font:7.0pt 'Times New Roman'">   </span>
+<span style="color:#00b050; font-family:宋体; font-size:14pt; font-weight:bold">静态分析</span>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">安装</span>
+<span style="font-family:Calibri; font-size:10.5pt">C++Test</span>
+<span style="font-family:宋体; font-size:10.5pt">插件版本后，打开</span>
+<span style="font-family:Calibri; font-size:10.5pt">VS2010</span>
+<span style="font-family:宋体; font-size:10.5pt">，创建或打开一个新工程，如下图操作：</span>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="553" height="346" alt=""/>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">将执行</span>
+<span style="font-family:Calibri; font-size:10.5pt">C++Test</span>
+<span style="font-family:宋体; font-size:10.5pt">默认的静态检测，默认方式包含了常用的代码审查、静态检测</span>
+<span style="font-family:Calibri; font-size:10.5pt">BUG</span>
+<span style="font-family:宋体; font-size:10.5pt">。例如对以下一段有问题的代码进行静态分析：</span>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">Calc</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">(</span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">void</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">* </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">pTest</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">, </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">&amp; </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">nK</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">)</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">{</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">* </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">pnTest</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> = (</span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">*)</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">pTest</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">*</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">pnTest</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> = 123;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">nK</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> = 100;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">return</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> (*</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">pnTest</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">) * </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">nK</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">}</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">GetVal</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">(</span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">nPara</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">)</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">{</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">return</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">nPara</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> - 10;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">}</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">void</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">CaaaDlg</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">::</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">OnBnClickedOk</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">()</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">{</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">//</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">例子</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">1</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">：设置了匈牙利命名编码规则</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">{</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">//</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">采用匈牙利命名变量，整型应该以</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">"i"</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">字母打头</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">, </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">下面代码应该是</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">"iAbc"</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">abc</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">=123; </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">}</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">//</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">例子</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">2</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">：</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">if</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">下面单条语句的花括号检查规则</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">{</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">i</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">=0,</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">k</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">=0; </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">if</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> (0==</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">i</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">) </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">//'if' </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">后面应该跟着块语句</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt"> ("{"</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">符号</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">)</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">k</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> = 0;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">else</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">k</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> = 1;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">}</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">//</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">例子</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">3</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">：动态计算检查除数为零</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">{</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">a</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> =100 / </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">GetVal</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">(10); </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">//GetVal</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">函数计算后返回的是</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">0</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">，</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">除数为</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">0</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">，静态检查中将能发现</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">}</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">//</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">例子</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">4</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">：数组越界</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">{</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">nArrAbc</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">[500];</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">nArrAbc</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">[501] = 123;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">iIndex</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">=100;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">nArrAbc</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">[</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">iIndex</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">+499] = 123;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">}</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">//</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">例子</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">5</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">：内存忘记释放</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">{</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">* </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">pT</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> = </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">new</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">[512];</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">}</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">//</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">例子</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">6</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">：根据实际需要，用户自定义的新规则</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">{</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">i</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">=0, </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">j</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">=2, </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">k</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">=0;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">if</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> (</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">i</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> &lt; </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">j</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">){ </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">//</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">定义了自己的规则，当有</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">"if (a &lt; b)"</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">形式时，例如静态分析显示</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">"</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">看看测试出问题后，是否输出这句话</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">.YanQingbing"</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">k</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> = 2;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">}</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">else</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">{</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">k</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> =3;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">}</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">}</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">//</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">例子</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">7</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">：白盒测试：对一个函数自动生成测试用例，能自动测试</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">{</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">abc</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">=100;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">k</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">=123;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">result</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> = </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">Calc</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">(&amp;</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">abc</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">, </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">k</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">);</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">TRACE</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">(</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">_T</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">("result[%d]"),</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">result</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">);</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">}</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">//</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">例子</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">8</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">：函数</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">return</span>
+<span style="background-color:#c0c0c0; color:#008000; font-family:新宋体; font-size:9pt">后面的代码，都是废代码，静态分析提示</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">return</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; color:#0000ff; font-family:新宋体; font-size:9pt">int</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">iBack</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">=0;</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">              </span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">CDialogEx</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">::</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">OnOK</span>
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">();</span>
+</p>
+<p style="margin:0pt 0pt 0pt 63pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:新宋体; font-size:9pt">}</span>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">静态分析后，结果如下：</span>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; widows:0">
+<img src="plugins/servlet/benryanconversion" width="553" height="346" alt=""/>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0">
+<span style="color:#00b050; font-family:Calibri; font-size:14pt; font-weight:bold">B.</span>
+<span style="font:7.0pt 'Times New Roman'">    </span>
+<span style="color:#00b050; font-family:宋体; font-size:14pt; font-weight:bold">静态分析环境设置和添加自定义规则</span>
+</p>
+<p style="margin:0pt 0pt 0pt 36.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt; font-weight:bold">1</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt; font-weight:bold">、</span>
+<a name="_Toc30856"/>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt; font-weight:bold">静态分析 —— </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt; font-weight:bold">BugDetective</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">1.</span>
+<span style="font:7.0pt 'Times New Roman'">         </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">点击“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ 测试配置” ，展开“内建 → </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Static Analysis</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">” ，然后</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Right click on</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">BugDetective</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">（</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">License Required</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">）” ，选择“复制” ：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="312" height="278" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">2.</span>
+<span style="font:7.0pt 'Times New Roman'">         </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">点击复制之后，可以在“用户自定义”列表下看见一个“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">BugDetective</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">（</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">License Required</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">）” （为什么要做这步操作呢？其实在“内建”中，也是可以执行这个测试的，但是不可以修改</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">BugDetective</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">的配置了。只有复制到“用户自定义”列表下后，配置才是可修改状态的）：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="456" height="278" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">3.</span>
+<span style="font:7.0pt 'Times New Roman'">         </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">点击复制之后，到“用户自定义”下的“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">BugDetective</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">（</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">License Required</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">）” ，选择“静态” ，浏览规则，我们这里还是用最经典的测试条款来做</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">demo</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="522" height="437" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt -21pt; orphans:0; text-indent:42pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">然后“应用 → 关闭” 。</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">4.</span>
+<span style="font:7.0pt 'Times New Roman'">         </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">执行测试：右键点击待测项目，选择“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ 测试执行 → 用户自定义” ，点击“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">1 BugDetective</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">”即可：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 42pt; orphans:0; text-align:center; text-indent:-42pt; widows:0">
+<img src="plugins/servlet/benryanconversion" width="673" height="472" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">5.</span>
+<span style="font:7.0pt 'Times New Roman'">         </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">为了检测出“避免除零错误”这个测试项，我用了一段专用代码：</span>
+</p>
+<table cellspacing="0" cellpadding="0" style="border-collapse:collapse; margin-left:0pt">
+<tr>
+<td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.5pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.5pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.5pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.5pt; padding-left:5.4pt; padding-right:5.4pt; vertical-align:top; width:426.1pt">
+<p style="margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt; font-weight:bold">void</span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt"> </span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt; font-weight:bold">main</span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt">()</span>
+</p>
+<p style="margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt">{</span>
+</p>
+<p style="margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt">              </span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt; font-weight:bold">int</span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt"> a = 5;</span>
+</p>
+<p style="margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt">    a %= zeroMethod(); // 违规</span>
+</p>
+<p style="margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt">}</span>
+</p>
+<p style="margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt; font-weight:bold">static</span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt"> </span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt; font-weight:bold">int</span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt"> </span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt; font-weight:bold">zeroMethod</span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt">()</span>
+</p>
+<p style="margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt">{</span>
+</p>
+<p style="margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt">    </span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt; font-weight:bold">return</span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt"> 0;</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt">}</span>
+</p>
+</td>
+</tr>
+</table>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">6.</span>
+<span style="font:7.0pt 'Times New Roman'">         </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">然后看测试执行结果：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="454" height="433" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">从上图，我们可以看见此</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">BUG</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">已经成功检验出。</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<a name="_Toc26300"/>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt; font-weight:bold">二、静态分析 —— </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt; font-weight:bold">CRules</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">1.</span>
+<span style="font:7.0pt 'Times New Roman'">         </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">点击“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ 测试配置” ，展开“内建 → </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Static Analysis</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">” ，然后</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Right click on</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">CRules</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">” ，选择“复制” ，点击复制之后，到“用户自定义”下的“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">CRules</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">” ，选择“静态” ，浏览规则并修改：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 21pt; orphans:0; text-align:center; text-indent:-21pt; widows:0">
+<img src="plugins/servlet/benryanconversion" width="633" height="655" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt -21pt; orphans:0; text-indent:42pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">然后“应用 → 关闭” 。</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">2.</span>
+<span style="font:7.0pt 'Times New Roman'">         </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">执行测试：右键点击待测项目，选择“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ 测试执行 → 用户自定义” ，点击“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">1 CRules</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">”之后，会自动执行测试并生成测试结果，可以在“控制台”和“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">”里看见：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="410" height="205" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 9.95pt; orphans:0; text-align:center; text-indent:-9.95pt; widows:0">
+<img src="plugins/servlet/benryanconversion" width="608" height="341" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">双击三角形黄色叹号后的行，可以直接链接到相应的代码处：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="523" height="423" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">3.</span>
+<span style="font:7.0pt 'Times New Roman'">         </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">如果不需要修改“内建”的规则，直接运行默认的测试配置，可以跳过复制那一步，直接运行测试，右键项目并选择“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ 测试执行 → 内建 → </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Static Analysis  </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">CRules</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">” ：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 42pt; orphans:0; text-align:center; text-indent:-42pt; widows:0">
+<img src="plugins/servlet/benryanconversion" width="660" height="441" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">4.</span>
+<span style="font:7.0pt 'Times New Roman'">         </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">右键点击问题列表中的具体错误信息：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="334" height="155" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">我们可以通过选择“定位”链接到源码问题处，可以选“抑制任务”填入原因来绕过这条规则的测试，可以选择“查看规则文档”来阅读此条规则的详细内容等。</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">抑制任务列表：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="391" height="356" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="271" height="278" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">点击确定后，可以看到软件下方的工作表区找到抑制列表。</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<a name="_Toc12119"/>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt; font-weight:bold">三、自定义静态分析测试规则</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">1.</span>
+<span style="font:7.0pt 'Times New Roman'">         </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">定义规则：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Click " C++test </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ 启动</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">RuleWizard" :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="273" height="158" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Click "File </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">New </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Rule" :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="295" height="127" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Select the "C,C++" , Click "By Node" , open up " Statements" , click "if" , click "OK" :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="194" height="386" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Then :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="376" height="438" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Right click on " if " , click " Condition[...] " :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="179" height="193" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Then , Click " Expressions </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Assignment </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">a&lt;b </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">OK" :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="178" height="295" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Then : </span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="147" height="65" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Right click on " if " , click " Create Output </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Display " :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="267" height="153" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">在</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Message</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">中输入信息，</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">click "OK" :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="328" height="118" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Right-click the empty space , select " Properties " :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="204" height="177" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Input "Rule ID" , "Header" and "Author" ,click "OK" :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="402" height="219" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Right-click the empty space , select " Save " :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="219" height="113" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">输入文件名，</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">click "OK" :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="279" height="99" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Then :</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="85" height="90" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">2.</span>
+<span style="font:7.0pt 'Times New Roman'">         </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">导入自定义规则</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">点击“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ 测试配置” ，选择用户自定义下的“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">CRules</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">” ，选择“静态” ，点击“导入” ：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="553" height="381" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">通过“浏览”找到刚才保存的</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">rules</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">文件，并点击“确定” ：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="429" height="151" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">在规则列表中，找到新导入的，并选中它，点击“应用 → 关闭” ：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="534" height="375" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">然后返回去再对待测源码执行一次</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">CRules </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="475" height="251" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">刚才定义的规则和输入语言都出来了。</span>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">PS</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">：这里我选择</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">if</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">和</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">a&lt;b</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">来进行说明这个规则添加的原因是我的</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">demo</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">源码中有“</span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt">              </span>
+<span style="background-color:#c0c0c0; color:#7f0055; font-family:'Courier New'; font-size:10.5pt; font-weight:bold">if</span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt">( </span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt; text-decoration:underline">i</span>
+<span style="background-color:#c0c0c0; font-family:'Courier New'; font-size:10.5pt"> &lt; j)</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">” ，所以定义这个规则，使这项测试有结果。</span>
+</p>
+<p style="margin:0pt 0pt 0pt 54.75pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:Calibri; font-size:10.5pt"> </span>
+</p>
+<p style="margin:0pt; orphans:0; text-align:justify; text-indent:15.75pt; widows:0">
+<span style="font-family:Calibri; font-size:16pt; font-weight:bold"> </span>
+</p>
+<p style="margin:0pt; orphans:0; text-align:justify; text-indent:15.75pt; widows:0">
+<span style="color:#ff0000; font-family:宋体; font-size:16pt; font-weight:bold">四、 自动化白盒测试</span>
+<span style="color:#ff0000; font-family:Calibri; font-size:10.5pt">(</span>
+<span style="background-color:#ededed; color:#ff0000; font-family:宋体; font-size:10.5pt; font-style:italic">程序员用来自己检测代码</span>
+<span style="color:#ff0000; font-family:Calibri; font-size:10.5pt">)</span>
+</p>
+<p style="margin:5pt 0pt; text-indent:15.75pt">
+<span style="color:#00b050; font-family:宋体; font-size:10.5pt; font-weight:bold">A. 自动建立测试驱动和桩函数 </span>
+</p>
+<p style="margin:5pt 0pt 5pt 15.75pt; text-indent:5.25pt">
+<span style="font-family:宋体; font-size:10.5pt">C++Test自动建立一个测试驱动程序，其设计目标是极大化类的测试覆盖性和错误检测。为类建立测试驱动，你只要简单地打开这个类，然后按Build Test键。C++Test将自动建立测试驱动程序。 </span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">另外，如果被测的方法需要调用当时还不存在或无法访问的函数，C++Test能够自动生成桩函数；这样能够测试与外部资源操作的交互作用和不包含任何隐藏的弱点。C++Test不是实际调用这些函数，而是调用桩函数并返回桩函数提供的值。如果你需要控制使用的返回值，你可以建立一个桩调用表，生命输入/输出的关系。 </span>
+</p>
+<p style="margin:5pt 0pt 5pt 15.75pt">
+<span style="font-family:宋体; font-size:10.5pt">你还能加入用户定义的桩函数。例如，如果你要使用原始的函数，且该函数定义在不同的文件中；或者你想要仿真原始函数的行为，而用一个简单的函数替代它 </span>
+</p>
+<p style="margin:5pt 0pt 5pt 15.75pt">
+<span style="font-family:宋体; font-size:10.5pt">自动生成C/C++类的测试驱动程序和桩函数的能力是C++Test所独有的；只有C++Test能够自动测试C/C++类（一当它能够编译时），而不需要用户的任何干预。使得你能够尽快地自动检测代码错误，以最容易、最省钱和最快速的方法找到和修正它们。如果没有这样的自动化工具，大量的时间和资源消耗将失去单元测试的潜在好处和现实意义。 </span>
+</p>
+<p style="margin:5pt 0pt; text-indent:15.75pt">
+<span style="color:#00b050; font-family:宋体; font-size:10.5pt; font-weight:bold">B. 白盒测试 </span>
+</p>
+<p style="margin:5pt 0pt 5pt 21pt">
+<span style="font-family:宋体; font-size:10.5pt">C++Test提供了一种有效并且高效的方法执行白盒测试。C++Test完全自动执行所有的白盒测试过程，自动生成和执行精心设计的测试用例。自动标记任何运行失败，并以一种简单的图示化结构显示。然后自动保存这些测试用例，能够方便地用于以后的回归测试。 </span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">由于C++Test能够自动生成桩函数，或允许你加入自己的桩函数，因此它能够测试引用外部对象的类。换句话说，C++Test能够运行任何一个或一组类，并自动生成和执行一组测试用例，它们被设计成能够发现尽可能多的错误。 </span>
+</p>
+<p style="margin:5pt 0pt 5pt 21pt">
+<span style="font-family:宋体; font-size:10.5pt">C++Test允许你定制白盒测试用例的生成，和在什么层次上（项目、文件、类或方法）执行测试。 </span>
+</p>
+<p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; widows:0">
+<span style="font-family:宋体; font-size:10.5pt">示例一</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　</span>
+<span style="font-family:Calibri; font-size:10.5pt">              </span>
+<span style="font-family:宋体; font-size:10.5pt">假设我们要测试如下一个类的成员函数：</span>
+<span style="font-family:Calibri; font-size:10.5pt">int mode2(int nParam)</span>
+<span style="font-family:宋体; font-size:10.5pt">，则在进行白盒测试时软件会自动为我们生成如下</span>
+<span style="font-family:Calibri; font-size:10.5pt">6</span>
+<span style="font-family:宋体; font-size:10.5pt">个测试用例：</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　</span>
+<span style="font-family:Calibri; font-size:10.5pt">nParam = 1, 0, -1, 2147483647, -2147483647, 230</span>
+<br/>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　可以看出，软件测试用例的生成主要还是测试一些边界值，例如最大值、最小值、</span>
+<span style="font-family:Calibri; font-size:10.5pt">0</span>
+<span style="font-family:宋体; font-size:10.5pt">等。</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　示例二</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　假设我们要测试如下一个类的成员函数：</span>
+<span style="font-family:Calibri; font-size:10.5pt">void strcpy(char* dest, char const * src)</span>
+<span style="font-family:宋体; font-size:10.5pt">，则软件会自动生成如下</span>
+<span style="font-family:Calibri; font-size:10.5pt">9</span>
+<span style="font-family:宋体; font-size:10.5pt">个测试用例：</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　</span>
+<span style="font-family:Calibri; font-size:10.5pt">(1) dest = NULL, src = NULL</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　</span>
+<span style="font-family:Calibri; font-size:10.5pt">(2) dest = "yPqKIJ!u_", src = NULL</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　</span>
+<span style="font-family:Calibri; font-size:10.5pt">(3) dest = "", src = NULL</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　</span>
+<span style="font-family:Calibri; font-size:10.5pt">(4) dest = NULL, src = "h)zn9b"</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　</span>
+<span style="font-family:Calibri; font-size:10.5pt">(5) dest = "BsmC,/i=zI6CT}pX", src = "HcI{BeP(J"</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　</span>
+<span style="font-family:Calibri; font-size:10.5pt">(6) dest = "", src = "% i?~TnON"</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　</span>
+<span style="font-family:Calibri; font-size:10.5pt">(7) dest = NULL, src = ""</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　</span>
+<span style="font-family:Calibri; font-size:10.5pt">(8) dest = "($MN&lt;n;^", src = ""</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　</span>
+<span style="font-family:Calibri; font-size:10.5pt">(9) dest = "", src = ""</span>
+<br/>
+<span style="font-family:宋体; font-size:10.5pt">　　可见，如果我们的代码在实现时没有对各种可能情况（尤其是边界条件）进行特殊处理的话，则通过</span>
+<span style="font-family:Calibri; font-size:10.5pt">C++Test</span>
+<span style="font-family:宋体; font-size:10.5pt">可以方便地发现这些潜在的问题。此外，对于一些特殊的测试情况，我们还可以手工创建测试用例。此外，采用</span>
+<span style="font-family:Calibri; font-size:10.5pt">C++ Test</span>
+<span style="font-family:宋体; font-size:10.5pt">也可以帮助我们检查程序的编码情况，判断是否严格按编码规范进行开发。</span>
+</p>
+<p style="margin:5pt 0pt; text-indent:15.75pt">
+<span style="color:#00b050; font-family:宋体; font-size:10.5pt; font-weight:bold">C. 一个简单测试教程</span>
+</p>
+<p style="margin:5pt 0pt; text-indent:15.75pt">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">A</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">nyway</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">，我们来一次快速的自动生成</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Test case</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">，并执行</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Test</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">的流程：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">1. Click</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ 测试配置” ：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="292" height="317" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">2. </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">然后进入了“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Test Configurations</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">” ，</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Right click on</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“用户自定义” ，</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Select the</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“新建” ，修改名称：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="259" height="164" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 63pt; orphans:0; text-align:center; text-indent:-63pt; widows:0">
+<img src="plugins/servlet/benryanconversion" width="721" height="564" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">3. </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">然后可以看一下“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Test Configurations</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">”的全图，其实看到“内建” ，大家就应该知道了，其实</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">已经默认创建了各种测试类型，可以一项一项分门别类的测试，这就是</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">developer</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">自我测试时使用的了，也可以通过用户自定义，定义一些自己想要测试的项，而身为测试人员，是肯定需要自己手动创建一个个</span>
+<span style="background-color:#c0c0c0; font-family:Arial; font-size:10.5pt">Test Solutions</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">，闲话先不说，我们继续简单熟悉</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">。</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">  </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Select the</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“静态”项：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 63pt; orphans:0; text-align:center; text-indent:-63pt; widows:0">
+<img src="plugins/servlet/benryanconversion" width="724" height="566" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">4. </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Select the</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“生成” ，按照下图所示选上相应选项：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="597" height="372" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">5. </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Select the</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“生成 → 测试套件” ，按照下图所示选上相应选项：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="596" height="288" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">6. </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Select the</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“生成 → 测试用例” ，按照下图所示选上相应选项：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="591" height="654" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">7. </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Select the</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“执行” ，按照下图所示选上相应选项：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="588" height="574" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">8. </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Select the</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“目标” ，按照下图所示选上相应选项：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="583" height="181" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">9. </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Select the</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“目标 → 执行” ，按照下图所示选上相应选项：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="581" height="400" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">10. Click</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Apply </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Close</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">” ：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="284" height="87" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">11. </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">在</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Solution Explorer</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">下的项目上</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Right click</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">，</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Select the</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">“</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">→ 测试运行 → 用户自定义 → </span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">2 main-new</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">（自定义的名称） ” ：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 63pt; orphans:0; text-align:center; text-indent:-63pt; widows:0">
+<img src="plugins/servlet/benryanconversion" width="732" height="157" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">12. </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">测试开始执行了：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 63pt; orphans:0; text-align:center; text-indent:-63pt; widows:0">
+<img src="plugins/servlet/benryanconversion" width="718" height="644" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">13. </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">到这里，你就使用</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">执行完一次完整的自动化静态分析和</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Unit Tests</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">了。</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:center; widows:0">
+<img src="plugins/servlet/benryanconversion" width="339" height="527" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">14. </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">上图还没有执行完，后部没有截出来而已，下图是执行之后的：</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 63pt; orphans:0; text-align:center; text-indent:-63pt; widows:0">
+<img src="plugins/servlet/benryanconversion" width="719" height="575" alt=""/>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">15. </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">从上图可以看见，执行完毕后会告诉你行覆盖率，成功和失败的数量等信息，在源代码中会使用红色和绿色标注测试的判断结果。当然绿色的也未必一定对，红色也有可能是断言插入失败所致。</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">这里只是用了一个小小的</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">item</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">来做了一些</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">test</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">。后面几天会研究手动设计</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">test case</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">的一些</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">flow</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">。</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">PS</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">：这里其实安装的</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">C++test7.3VS2008Extension</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">，并不是完整版，明天我会上传完整版的测试。今天没有带笔记本过来。</span>
+</p>
+<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">暂时先用变态的</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">English OS </span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">和</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Chinese C++test</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">做研究，之后会用全</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">English</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">的做一个完整的</span>
+<span style="background-color:#c0c0c0; font-family:Calibri; font-size:10.5pt">Demo</span>
+<span style="background-color:#c0c0c0; font-family:宋体; font-size:10.5pt">。</span>
+</p>
+</div>
+    </div>
+</div>
+</p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2229074/2523259.docx">ParaSoft C++Test代码静态分析.docx</a> (application/vnd.openxmlformats-officedocument.wordprocessingml.document)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2229074/2523252.docx">ParaSoft C++Test代码静态分析.docx</a> (application/vnd.openxmlformats-officedocument.wordprocessingml.document)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="comments" class="pageSectionTitle">Comments:</h2>
+                        </div>
+
+                        <table border="0" width="100%">
+                                                        <tr>
+                                <td >
+                                    <a name="comment-2229094"></a>
+                                    <font class="smallfont"><p><em><div class="error">Error rendering macro 'viewdoc' : The viewfile macro is unable to locate the page "C++Test代码静态分析和程序内部测试" in space "null"</div></em></p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by jianghua at 2013-02-25 02:02:09
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </table>
+                    </div>
+                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://10.30.1.104:8090/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on 2015-10-30 12:39:14</small></p>
+            </div>
+        </div>     </body>
+</html>

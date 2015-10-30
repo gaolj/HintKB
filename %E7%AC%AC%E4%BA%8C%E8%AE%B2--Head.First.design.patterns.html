@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>内部资料 : 第二讲--Head.First.design.patterns</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            内部资料 : 第二讲--Head.First.design.patterns
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on 2014-07-25 by <font color="#0050B2">gaolj</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="id-第二讲--Head.First.design.patterns-Internet气象观测站">Internet气象观测站</h1><p>气象站：获取实际气象数据（温度、湿度、气压）的物理装置</p><p>WeatherData对象：从气象站获取数据，并更新布告板</p><p>布告板：显示目前天气状况给用户看</p><p>当WeatherData对象获得最新的测量数据时，三种布告板必须实时更新</p><p>三种布告板：</p><ol><li>目前的状况、</li><li>气象统计</li><li>简单的预报</li></ol><p>可以扩展的气象站，公布一组API，其他开发人员可以写出自己的气象布告板</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><p> </p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">// 主题（被观察者）接口类
+class Subject
+{
+public:
+	virtual void registerObserver(Observer o);// 这两个方法都需要一个观察者作为变量，该观察者是用来注册
+	virtual void removeObserver(Observer o;	// 或被删除的
+	virtual void notifyObservers();			// 当主题状态改变时，这个方法会被调用，以通知所有的观察者。
+};
+
+// WeatherData实现了Subject接口
+class WeatherData : public Subject
+{
+private:
+	std::list&lt;Observer&gt; observers;		// 用list来纪录观察者
+	float temperature;
+	float humidity;
+	float pressure;
+public:
+	// 注册观察者，把观察者加入list
+	void registerObserver(Observer &amp;obsvr)
+	{
+		observers.push_back(obsvr);
+	}
+	// 取消注册
+	void removeObserver(Observer &amp;obsvr)
+	{
+		observers.remove(obsvr);
+	}
+	// 把状态告诉每一个观察者。因为观察者都实现了update()，所以我观察者都实现了update()，所以我
+	void notifyObservers()
+	{
+		for (auto it = observers.begin(); it != observers.end(); it++)	// list&lt;Observer&gt;::iterator it;
+			it-&gt;update(temperature, humidity, pressure);
+	}
+	// 当从气象站得到更新观测值当从气象站得到更新观测值
+	void measurementsChanged()
+	{
+		notifyObservers();
+	}
+	void setMeasurements(float temperature, float humidity, float pressure)
+	{
+		this-&gt;temperature = temperature;
+		this-&gt;humidity = humidity;
+		this-&gt;pressure = pressure;
+		measurementsChanged();
+	}
+};
+ </pre>
+</div></div><p> </p></th><th class="confluenceTh"><p> </p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">//DisplayElement接口类
+class DisplayElement
+{
+public:
+	void display();	// 当布告板需要显示更新，调用此方法
+};
+
+
+// 观察者接口类
+class Observer
+{
+public:
+	// 所有的观察者都必须实现此方法--观察者接口。当气象观测值改变时，主题会把这些状态值当作方法的参数，push给观察者。
+	void update(float temp, float humidity, float pressure);
+};
+ 
+// 当前天气布告板，实现了Observer接口，所以可以从WeatherData对象中获得改变
+class CurrentConditionsDisplay : public Observer, DisplayElement
+{
+private:
+	float temperature;
+	float humidity;
+	Subject weatherData;
+public:
+	// 构造器需要weatherData对象（也就是主题）作为注册之用
+	CurrentConditionsDisplay(Subject weatherData)
+	{
+		this-&gt;weatherData = weatherData;
+		weatherData.registerObserver(*this);
+	}
+	// 当update()被调用时，把温度和湿度保存起来，然后调用display()
+	void update(float temperature, float humidity, float pressure)
+	{
+		this-&gt;temperature = temperature;
+		this-&gt;humidity = humidity;
+		display();
+	}
+	// 显示最近的温度和湿
+	void display()
+	{
+		cout &lt;&lt; &quot;Current conditions: &quot; &lt;&lt; temperature &lt;&lt; &quot;F degrees and &quot; &lt;&lt; humidity &lt;&lt; &quot;% humidity&quot;;
+	}
+}
+int main(int argc, char* argv[])
+{
+	// 建立一个WeatherData对象
+	WeatherData weatherData;
+	// 建 立 三 个 布 告 板
+	CurrentConditionsDisplay currentDisplay(weatherData);
+	StatisticsDisplay statisticsDisplay(weatherData);
+	ForecastDisplay forecastDisplay(weatherData);
+	// 模拟新的气象测量
+	weatherData.setMeasurements(80, 65, 30.4f);
+	weatherData.setMeasurements(82, 70, 29.2f);
+	weatherData.setMeasurements(78, 90, 29.2f);
+}</pre>
+</div></div><p> </p></th></tr></tbody></table></div><h1 id="id-第二讲--Head.First.design.patterns-模拟鸭子游戏">模拟鸭子游戏</h1><p>游戏中会出现各种鸭子，一边游泳戏水，一边呱呱叫。</p><p>唯一的不同：<span style="font-size: 10.0pt;line-height: 13.0pt;">每 一 种 鸭 子 的外 观 都 不 同</span></p><h2 id="id-第二讲--Head.First.design.patterns-变化一"><span style="font-size: 10.0pt;line-height: 13.0pt;">变化一</span></h2><p>新加了会飞的鸭子，产生新问题</p><h2 id="id-第二讲--Head.First.design.patterns-设计原则">设计原则</h2><p><span style="font-size: 10.0pt;line-height: 13.0pt;">找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码混在一起。</span></p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">//DisplayElement接口类
+class DisplayElement
+{
+public:
+	void display();	// 当布告板需要显示更新，调用此方法
+};
+
+
+// 观察者接口类
+class Observer
+{
+public:
+	// 所有的观察者都必须实现此方法--观察者接口。当气象观测值改变时，主题会把这些状态值当作方法的参数，push给观察者。
+	void update(float temp, float humidity, float pressure);
+};
+ 
+// 主题（被观察者）接口类
+class Subject
+{
+public:
+	virtual void registerObserver(Observer o);// 这两个方法都需要一个观察者作为变量，该观察者是用来注册
+	virtual void removeObserver(Observer o;	// 或被删除的
+	virtual void notifyObservers();			// 当主题状态改变时，这个方法会被调用，以通知所有的观察者。
+};
+
+// WeatherData实现了Subject接口
+class WeatherData : public Subject
+{
+private:
+	std::list&lt;Observer&gt; observers;		// 用list来纪录观察者
+	float temperature;
+	float humidity;
+	float pressure;
+public:
+	// 注册观察者，把观察者加入list
+	void registerObserver(Observer &amp;obsvr)
+	{
+		observers.push_back(obsvr);
+	}
+	// 取消注册
+	void removeObserver(Observer &amp;obsvr)
+	{
+		observers.remove(obsvr);
+	}
+	// 把状态告诉每一个观察者。因为观察者都实现了update()，所以我观察者都实现了update()，所以我
+	void notifyObservers()
+	{
+		for (auto it = observers.begin(); it != observers.end(); it++)	// list&lt;Observer&gt;::iterator it;
+			it-&gt;update(temperature, humidity, pressure);
+	}
+	// 当从气象站得到更新观测值当从气象站得到更新观测值
+	void measurementsChanged()
+	{
+		notifyObservers();
+	}
+	void setMeasurements(float temperature, float humidity, float pressure)
+	{
+		this-&gt;temperature = temperature;
+		this-&gt;humidity = humidity;
+		this-&gt;pressure = pressure;
+		measurementsChanged();
+	}
+};
+
+// 当前天气布告板，实现了Observer接口，所以可以从WeatherData对象中获得改变
+class CurrentConditionsDisplay : public Observer, DisplayElement
+{
+private:
+	float temperature;
+	float humidity;
+	Subject weatherData;
+public:
+	// 构造器需要weatherData对象（也就是主题）作为注册之用
+	CurrentConditionsDisplay(Subject weatherData)
+	{
+		this-&gt;weatherData = weatherData;
+		weatherData.registerObserver(*this);
+	}
+	// 当update()被调用时，把温度和湿度保存起来，然后调用display()
+	void update(float temperature, float humidity, float pressure)
+	{
+		this-&gt;temperature = temperature;
+		this-&gt;humidity = humidity;
+		display();
+	}
+	// 显示最近的温度和湿
+	void display()
+	{
+		cout &lt;&lt; &quot;Current conditions: &quot; &lt;&lt; temperature &lt;&lt; &quot;F degrees and &quot; &lt;&lt; humidity &lt;&lt; &quot;% humidity&quot;;
+	}
+}
+int main(int argc, char* argv[])
+{
+	// 建立一个WeatherData对象
+	WeatherData weatherData;
+	// 建 立 三 个 布 告 板
+	CurrentConditionsDisplay currentDisplay(weatherData);
+	StatisticsDisplay statisticsDisplay(weatherData);
+	ForecastDisplay forecastDisplay(weatherData);
+	// 模拟新的气象测量
+	weatherData.setMeasurements(80, 65, 30.4f);
+	weatherData.setMeasurements(82, 70, 29.2f);
+	weatherData.setMeasurements(78, 90, 29.2f);
+}</pre>
+</div></div><p><br />观察者模式——在对象之间定义一对多的依赖，这样一来，当一个对象改变状态，依赖它的对象都会收到通知，并自动更新。</p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://10.30.1.104:8090/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on 2015-10-30 12:39:21</small></p>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>内部资料 : 注释规范</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            内部资料 : 注释规范
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on 2013-09-26 by <font color="#0050B2">gaolj</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="id-注释规范-总体要求">总体要求</h1><ol><li>注释尽可能用“//”，而少用/**/</li><li>注释放在代码的上方或右方，不能在下方</li><li>注释是对代码的“提示”，而不是设计文档，要做到言简意赅</li><li>注释要准确，易懂，防止注释有二义性</li><li>注释与代码必须一致，代码变动，则注释也要变动</li><li>需要生成注释文档的地方，采用doxygen的注释方式&quot;///&quot;。采用开源工具Doxygen，可以直接从C/C++源码中抽取文档，输出成html、pdf等格式源代码说明文档</li><li>不需要生成注释文档的地方，如函数内部的注释使用&quot;//&quot;，不使用&quot;///&quot;。也就是说，.h头文件里的注释用&quot;///&quot;，.cpp源文件里的注释用&quot;//&quot;</li></ol><p style="margin-left: 30.0px;"> 参考：<br /><a href="http://wenku.baidu.com/view/b01e9f8083d049649b665811.html###" class="external-link" rel="nofollow">Doxygen的注释风格</a></p><h1 id="id-注释规范-自动添加注释">自动添加注释</h1><ol><li><span>打开&quot;Macro 资源管理器&quot;：</span>打开VC2010，选择菜单&quot;工具&quot;-&gt;&quot;宏&quot;-&gt;&quot;Macro 资源管理器&quot;</li><li>在&quot;Macro 资源管理器&quot;中，右键点击&quot;宏&quot;，选&quot;加载宏项目&quot;</li><li>在文件选择窗中选择：<a href="attachments/5472841/5701708.vsmacros">Comment.vsmacros</a> （此文件先保存到本地）</li><li>&quot;宏&quot;下面会出现加载的&quot;Comment&quot;宏模块，其中&quot;Doxgen&quot;下有&quot;ClassComment&quot;、“FunctionComment”等宏</li><li><p>把光标定位到函数或类声明之上，右键&quot;FunctionComment&quot;/“ClassComment”-&gt;&quot;运行&quot;，或使用快捷键（<span>ALT+C, <span>ALT+C</span></span>）（<span>ALT+C, </span><span>ALT+F</span>），就会在函数或类上自动生成注释<br /><br />参考：<br /><a href="http://192.160.101.104:8090/pages/viewpage.action?pageId=5472510" class="external-link" rel="nofollow">VC2010使用技巧 </a><br /><a href="http://blog.csdn.net/garyliyong/article/details/7585051" class="external-link" rel="nofollow">给VC2010自动添加注释</a></p></li></ol><h1 id="id-注释规范-注释示例">注释示例</h1><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">结构、枚举、函数</th><th class="confluenceTh"> </th></tr><tr><td class="confluenceTd"><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: cpp; gutter: false" style="font-size:12px;">/// 坐标结构体，定义一个点在x轴、y轴上的坐标
+struct Point 
+{
+	int x;		///&lt; x轴坐标
+	int y;		///&lt; y轴坐标
+}
+
+/// 颜色枚举  
+///
+/// 该枚举定义了系统中需要用到的颜色\n  
+/// 可以使用该枚举作为系统中颜色的标识  
+enum EColor 
+{
+	RED = 0;	///&lt; 红色
+	GREEN = 1;	///&lt; 绿色
+	BLUE = 2;	///&lt; 蓝色
+	YELLOW = 3	///&lt; 黄色
+}
+
+/// 除法运算 
+/// @param	a	被除数
+/// @param	b	除数
+/// @return		商
+/// @exception	b不能为0，否则会抛异常
+int div(int a, int b)
+{
+}
+</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">// 结构体的简述，简述一般为一行
+// 如果简述足够表达含义，则可以不写详述
+
+ 
+// 后置注释加&lt;
+ 
+ 
+ 
+// 枚举的简述，省略@brief
+// 简述和详述间空一行
+// 详述，如果要换行显示必须加\n
+ 
+ 
+ 
+// 后置注释加&lt;
+ 
+ 
+ 
+ 
+ 
+// div函数的简述，省略@brief
+// 参数
+// 参数
+// 返回值
+ 
+
+ 
+ 
+ </pre>
+</div></div></td></tr></tbody></table></div><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">类注释</th><th class="confluenceTh"> </th></tr><tr><td class="confluenceTd"><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: cpp; gutter: false" style="font-size:12px;">/// 多线程TCP server类
+/// 
+/// TCPServer使用线程池管理所有连接，
+/// 每一个连接分配一个线程，线程数最高为1000，
+/// 也就是说TCPServer最多同时接受的1000个连接。
+/// 
+/// TCPServer使用单独的线程用来监听连接，
+/// 要停止此TCPServer，需调用stop(),
+/// 然后TCPServer不再接受新连接，并等待现有连接的断开
+class TCPServer :
+{
+public:
+	/// 构造TCPServer，处于未运行状态 
+	TCPServer();
+ 
+	/// 内部会调用stop
+	virtual ~TCPServer();
+	
+	/// 起动服务器，开始监听新的连接
+	/// @param[in][out] port 监听端口，
+	/// 如果port!=0，则为传入参数，为监听端口，
+	/// 如果port=0,则port返回实际监听端口。
+	void start(int &amp;port);
+ 
+	/// 停止服务器
+	/// @param force 是否强制关闭现有连接后再停止
+	void stop(bool force  = false);
+	
+private:
+	/// 监听连接
+	void listen(void);
+ 
+	/// 监听套接字
+	socket	m_tcpAcceptor;
+};
+</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">// 简述
+ 
+// 详述，只会生成一行内容
+
+ 
+// 会换一行生成下面的详述
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+// 每个函数间要空开一行 
+ 
+ 
+ 
+ 
+// 传出类参数，必须有[out]
+// 传入传出类参数，必须有[in][out]
+ 
+  
+ 
+ 
+// 传入类参数，[in]可省略
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ </pre>
+</div></div></td></tr></tbody></table></div><p> </p><p> </p><p> </p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/5472841/5701708.vsmacros">Comment.vsmacros</a> (application/octet-stream)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://10.30.1.104:8090/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on 2015-10-30 12:39:14</small></p>
+            </div>
+        </div>     </body>
+</html>

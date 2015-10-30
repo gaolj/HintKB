@@ -1,0 +1,373 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>内部资料 : Json学习</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            内部资料 : Json学习
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on 2014-04-03 by <font color="#0050B2">nijl</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="Json学习-什么是JSON？">什么是 JSON ？</h2><p><strong><span style="color: rgb(0,0,0);">JSON：JavaScript 对象表示法</span>（<span class="marked" style="color: rgb(221,0,0);">J</span>ava<span class="marked" style="color: rgb(221,0,0);">S</span>cript <span class="marked" style="color: rgb(221,0,0);">O</span>bject <span class="marked" style="color: rgb(221,0,0);">N</span>otation）</strong></p><p><strong><span style="color: rgb(0,0,0);">JavaScript：</span></strong><span style="color: rgb(0,0,0);">是一种</span>脚本语言，<span style="color: rgb(0,0,0);">可插入HTML 页面的编程代码，</span><span style="color: rgb(0,0,0);">浏览器解释执行</span></p><p><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);">JSON建构于两种结构</span></span></p><ol><li><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);">“名称/值”对的集合</span></span></span></li><li><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);">值的列表</span></span></span></span></li></ol><p><span style="color: rgb(0,0,0);">官方语法表示：</span></p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">object
+	{}
+	{ members }
+members
+	pair
+	pair , members
+pair
+	string : value
+array
+	[]
+	[ elements ]
+elements
+	value 
+	value , elements
+value
+	string
+	number
+	true
+	false
+	null
+	object	***
+	array	***</pre>
+</div></div><p><span style="color: rgb(0,0,0);">EBNF语法图和示例对象</span></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><td class="confluenceTd"><img class="confluence-embedded-image confluence-external-resource" width="500" src="http://www.json.org/object.gif" data-image-src="http://www.json.org/object.gif"></td><td class="confluenceTd"><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">{ }
+{ &quot;name&quot;: &quot;John&quot; }
+{ &quot;name&quot;: &quot;John&quot;，&quot;age&quot;: 25}
+ 
+{ &quot;name&quot;: &quot;John&quot;，&quot;address&quot;: {
+							&quot;street&quot;: &quot;21 Street&quot;, &quot;city&quot;: &quot;New York&quot;
+							}
+}
+ 
+{ &quot;name&quot;: &quot;John&quot;，&quot;phone&quot;: [
+							{&quot;type&quot;:&quot;home&quot;, &quot;number&quot;:&quot;111&quot;},                                
+							{&quot;type&quot;:&quot;fax&quot;, &quot;number&quot;:&quot;222&quot;}
+						   ]
+}
+
+
+</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><img class="confluence-embedded-image confluence-external-resource" width="500" src="http://www.json.org/array.gif" data-image-src="http://www.json.org/array.gif"></td><td class="confluenceTd"><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">{
+    &quot;phoneNumber&quot;: [
+        {&quot;type&quot;:&quot;home&quot;, &quot;number&quot;:&quot;111&quot;},                                
+        {&quot;type&quot;:&quot;fax&quot;, &quot;number&quot;:&quot;222&quot;}
+    ]
+}</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><img class="confluence-embedded-image confluence-external-resource" width="500" src="http://www.json.org/value.gif" data-image-src="http://www.json.org/value.gif"></td><td class="confluenceTd"> </td></tr></tbody></table></div><p> </p><p><span style="color: rgb(0,0,0);"><br /></span></p><p><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);"><br /></span></span></span></span></p><p><span style="color: rgb(0,0,0);"><strong>示例：</strong></span></p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">// C++类及对对象表示：
+class Employee
+{
+	string firstName;
+	string lastName;
+};
+ 
+vector&lt;Employee&gt; employees;
+ 
+// Delphi类及对象表示：
+TEmployee = class
+	firstName: string;
+    lastName: string;
+end;
+ 
+TEmployees = TList&lt;TEmployee&gt;;
+ 
+// 对应Json对象表示
+&quot;firstName&quot;:&quot;Thomas&quot;	// 一条数据，即name/value对
+						// name和value要用双引号，name和value间用冒号分隔
+ 
+{
+	&quot;employees&quot;:
+	[
+		{ &quot;firstName&quot;:&quot;Bill&quot; , &quot;lastName&quot;:&quot;Gates&quot; },	// 对象可以包含多个名称/值对，名称/值对间由逗号分隔
+		{ &quot;firstName&quot;:&quot;George&quot; , &quot;lastName&quot;:&quot;Bush&quot; },
+		{ &quot;firstName&quot;:&quot;Thomas&quot; , &quot;lastName&quot;:&quot;Carter&quot; }
+	]	// 方括号保存数组，数组可包含多个对象
+}		// 花括号保存对象
+对象 &quot;employees&quot; 是包含三个对象的数组。每个对象代表一条关于某人（有姓和名）的记录
+ </pre>
+</div></div><p><span style="color: rgb(0,0,0);"><strong>特点：</strong></span></p><ol><li><span style="color: rgb(0,0,0);">JSON是一种文本数据格式，类似 XML，用于存储和交换文本信息，<span style="color: rgb(0,0,0);">序列化格式</span></span></li><li><span style="color: rgb(0,0,0);">JSON比 XML更轻量级 ， 更小、更快，更易解析</span></li><li><span style="color: rgb(0,0,0);">独立于语言和平台</span></li></ol><p><strong><span style="color: rgb(0,0,0);">与XML比较</span></strong></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">相似</th><th class="confluenceTh">不同</th></tr><tr><td class="confluenceTd"><ul><li><span style="font-size: 10.0pt;line-height: 13.0pt;color: rgb(0,0,0);">JSON 是纯文本</span></li><li><span style="color: rgb(0,0,0);">JSON 具有“自我描述性”（人类可读）</span></li><li><span style="color: rgb(0,0,0);">JSON 具有层级结构（值中存在值）</span></li><li><span style="color: rgb(0,0,0);">JSON 可通过 JavaScript 进行解析</span></li><li><span style="color: rgb(0,0,0);">JSON 数据可使用 AJAX 进行传输</span></li></ul></td><td class="confluenceTd"><ul><li><span style="color: rgb(0,0,0);">没有结束标签</span></li><li><span style="color: rgb(0,0,0);">更短</span></li><li><span style="color: rgb(0,0,0);">读写的速度更快</span></li><li><span style="color: rgb(0,0,0);">能够使用内建的 JavaScript eval() 方法进行解析</span></li><li><span style="color: rgb(0,0,0);">使用数组</span></li><li><span style="color: rgb(0,0,0);">不使用保留字</span></li></ul></td></tr></tbody></table></div><div class="table-wrap"><table class="confluenceTable"><tbody><tr><td class="confluenceTd"><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">{
+    &quot;firstName&quot;: &quot;John&quot;,
+    &quot;lastName&quot;: &quot;Smith&quot;,
+    &quot;age&quot;: 25,
+    &quot;address&quot;: {
+        &quot;streetAddress&quot;: &quot;21 2nd Street&quot;,
+        &quot;city&quot;: &quot;New York&quot;,
+        &quot;state&quot;: &quot;NY&quot;,
+        &quot;postalCode&quot;: &quot;10021&quot;
+    },
+    &quot;phoneNumber&quot;: [
+        {&quot;type&quot;: &quot;home&quot;, &quot;number&quot;: &quot;212 555-1234&quot;},                                
+        {&quot;type&quot;: &quot;fax&quot;, &quot;number&quot;: &quot;646 555-4567&quot;}
+    ],
+    &quot;gender&quot;:{&quot;type&quot;:&quot;male&quot;}
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">&lt;person&gt;
+  &lt;firstName&gt;John&lt;/firstName&gt;
+  &lt;lastName&gt;Smith&lt;/lastName&gt;
+  &lt;age&gt;25&lt;/age&gt;
+  &lt;address&gt;
+    &lt;streetAddress&gt;21 2nd Street&lt;/streetAddress&gt;
+    &lt;city&gt;New York&lt;/city&gt;
+    &lt;state&gt;NY&lt;/state&gt;
+    &lt;postalCode&gt;10021&lt;/postalCode&gt;
+  &lt;/address&gt;
+  &lt;phoneNumbers&gt;
+    &lt;phoneNumber type=&quot;home&quot;&gt;212 555-1234&lt;/phoneNumber&gt;
+    &lt;phoneNumber type=&quot;fax&quot;&gt;646 555-4567&lt;/phoneNumber&gt;
+  &lt;/phoneNumbers&gt;
+  &lt;gender&gt;
+    &lt;type&gt;male&lt;/type&gt;
+  &lt;/gender&gt;
+&lt;/person&gt;</pre>
+</div></div></td></tr></tbody></table></div><p> </p><p><span style="color: rgb(0,0,0);"><strong>程序处理</strong></span></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><h4 id="Json学习-使用XML">使用 XML</h4></th><th class="confluenceTh"><h4 id="Json学习-使用JSON">使用 JSON</h4></th></tr><tr><td class="confluenceTd"><ul><li>读取 XML 文档</li><li>使用DOM全部加载到内存中，遍历文档</li><li>或用SAX，边读加解析</li></ul></td><td class="confluenceTd"><ul><li><span style="color: rgb(0,0,0);">浏览器都有<span style="color: rgb(0,0,0);">原生的 JSON 支持</span></span></li><li><pre>var obj = eval(<span style="font-size: 10.0pt;line-height: 13.0pt;white-space: pre-wrap;font-family: Arial , Helvetica , FreeSans , sans-serif;">JSON 字符串）</span></pre></li></ul></td></tr></tbody></table></div><h1 id="Json学习-C/C++中使用Json">C/C++中使用Json</h1><h1 id="Json学习-JsonCPP" style="margin-left: 0.0px;"><span style="color: black;"> </span><span><span style="color: black;">JsonCPP</span></span></h1><p style="margin-left: 0.0px;"><span><span style="color: black;"> </span>jsoncpp<span style="color: black;">是</span><span style="color: black;">c++</span><span style="color: black;">解析</span><span style="color: black;">JSON</span><span style="color: black;">串常用的解析库之一。其常用的类有：</span></span></p><ol><li><span><span style="color: black;">Json::Value    </span><span style="color: black;">表示所有的类型，比如</span><span style="color: black;">int、string、object、array</span><span style="color: black;">等，其支持的类型可以参考</span><span style="color: black;">Json:ValueType</span><span style="color: black;">中的值。</span></span></li><li><span><span style="color: black;">Json::Reader  </span><span style="color: black;">将</span><span style="color: black;">json</span><span style="color: black;">文件流或字符串解析到</span><span style="color: black;">Json::Value，</span><span style="color: black;">主要函数有</span><span style="color: black;">Parse</span><span style="color: black;">。</span></span></li><li><span><span style="color: black;">Json::Writer  </span><span style="color: black;">将</span><span style="color: black;">Json::Value</span><span style="color: black;">转化成字符串流，注意它的两个子类：</span><span style="color: black;">Json::FastWriter</span><span style="color: black;">和</span><span style="color: black;">Json::StyleWriter</span><span style="color: black;">，分别输出不带格式的</span><span style="color: black;">json</span><span style="color: black;">和带格式的</span><span style="color: black;">json</span><span style="color: black;">。</span></span></li><li><span><span style="color: black;">Json::Value::Members</span><span style="color: black;">主要用于以</span><span style="color: black;">STL</span><span style="color: black;">风格解析</span><span style="color: black;">JSON</span><span style="color: black;">数组。</span><span style="color: black;">Members</span><span style="color: black;">其实是</span><span style="color: black;">typedefvector</span><span style="color: black;">而已。</span></span></li></ol><p><span><span style="color: black;"> 示例代码：</span></span></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><td class="confluenceTd"><div class="code panel" style="border-width: 1px;"><div class="codeHeader panelHeader" style="border-bottom-width: 1px;"><b>C++ 读取JSON示例</b></div><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: cpp; gutter: false" style="font-size:12px;">void load()
+{
+	// 读取文件
+    std::ifstream ifs;
+    ifs.open(&quot;json.txt&quot;);
+    if(!ifs.is_open())
+		return;
+	Json::Reader reader;
+	Json::Value root;
+ 
+	// 解析
+	if (!reader.parse(ifs, root, false))
+		std::cout &lt;&lt; &quot;json parse error!&quot;;
+	// 获取json内容
+	// 获取三个pair
+	std::string first = root[&quot;firstName&quot;].asString();
+	std::cout &lt;&lt; first &lt;&lt; std::endl;
+	std::string last = root[&quot;lastName&quot;].asString();
+	std::cout &lt;&lt; last &lt;&lt; std::endl;
+	int age = root[&quot;age&quot;].asInt();
+	std::cout &lt;&lt; age &lt;&lt; std::endl;
+ 
+	// 获取一个对象
+	Json::Value address = root[&quot;address&quot;];
+	std::cout &lt;&lt; &#39;\t&#39;  &lt;&lt; address[&quot;streetAddress&quot;].asString() &lt;&lt; std::endl;
+	std::cout &lt;&lt; &#39;\t&#39;  &lt;&lt; address[&quot;city&quot;].asString() &lt;&lt; std::endl;
+	std::cout &lt;&lt; &#39;\t&#39;  &lt;&lt; address[&quot;state&quot;].asString() &lt;&lt; std::endl;
+	std::cout &lt;&lt; &#39;\t&#39;  &lt;&lt; address[&quot;postalCode&quot;].asString() &lt;&lt; std::endl;
+ 
+	// 获取一个list
+	Json::Value arrayObj = root[&quot;phoneNumber&quot;];
+	for (int i = 0; i&lt;arrayObj.size(); i++)
+	{
+		std::cout &lt;&lt; &quot;\t\t&quot; &lt;&lt; arrayObj[i][&quot;type&quot;].asString();
+		std::cout &lt;&lt; &quot;: &quot;&lt;&lt; arrayObj[i][&quot;number&quot;].asString();
+		std::cout &lt;&lt; std::endl;
+	}
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </pre>
+</div></div><p> </p><p> </p></td><td class="confluenceTd"><div class="code panel" style="border-width: 1px;"><div class="codeHeader panelHeader" style="border-bottom-width: 1px;"><b>C++ 保存JSON示例</b></div><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: cpp; gutter: false" style="font-size:12px;">//{
+//    &quot;firstName&quot;: &quot;John&quot;,
+//    &quot;lastName&quot;: &quot;Smith&quot;,
+//    &quot;age&quot;: 25,
+//    &quot;address&quot;: {
+//        &quot;streetAddress&quot;: &quot;21 2nd Street&quot;,
+//        &quot;city&quot;: &quot;New York&quot;,
+//        &quot;state&quot;: &quot;NY&quot;,
+//        &quot;postalCode&quot;: &quot;10021&quot;
+//    },
+//    &quot;phoneNumber&quot;: [
+//        {&quot;type&quot;: &quot;home&quot;, &quot;number&quot;: &quot;212 555-1234&quot;},                                
+//        {&quot;type&quot;: &quot;fax&quot;, &quot;number&quot;: &quot;646 555-4567&quot;}
+//    ],
+//    &quot;gender&quot;:{&quot;type&quot;:&quot;male&quot;}
+//}
+
+
+void save()
+{
+	Json::Value root;
+ 
+	// 三个pair
+	root[&quot;firstName&quot;] = &quot;John&quot;;
+	root[&quot;lastName&quot;] = &quot;Smith&quot;;
+	root[&quot;age&quot;] = &quot;25&quot;;
+	
+	// 一个对象
+	Json::Value addr;
+	addr[&quot;streetAddress&quot;] = &quot;21 2nd Street&quot;;
+	addr[&quot;city&quot;] = &quot;New York&quot;;
+	addr[&quot;state&quot;] = &quot;NY&quot;;
+	addr[&quot;postalCode&quot;] = &quot;10021&quot;;
+	root[&quot;address&quot;] = addr;
+ 
+	// 一个list
+	Json::Value arrayObj;
+	Json::Value item1, item2;
+	item1[&quot;type&quot;] = &quot;home&quot;;
+	item1[&quot;number&quot;] = 51077788;
+	arrayObj.append(item1);
+	item2[&quot;type&quot;] = &quot;fax&quot;;
+	item2[&quot;number&quot;] = &quot;646 555-4567&quot;;
+	arrayObj.append(item2);
+	root[&quot;phoneNumber&quot;] = arrayObj;
+ 
+	// 控制台输出结果
+	std::string out = root.toStyledString();
+	std::cout &lt;&lt; out &lt;&lt; std::endl;
+	return;
+}
+
+</pre>
+</div></div><p> </p><p> </p></td></tr></tbody></table></div><p><span><span style="color: black;"><br /></span></span></p><p><span><span style="color: black;">源码下载：<a href="attachments/8224807/8749057.rar">jsoncpp-src-0.5.0.rar</a>            解决方案文件（vc2010打开）：jsoncpp-src-0.5.0\makefiles\vs71\jsoncpp.sln，示例项目：jsontest</span></span></p><p><span><span style="color: black;"><br /></span></span></p><p><span><span style="color: black;"> </span></span></p><h1 id="Json学习-Delphi中使用Json">Delphi中使用Json</h1><p><span><span style="color: black;"> </span></span></p><h1 id="Json学习-SuperObject"><span> </span><span>SuperObject</span></h1><p><span><span style="color: black;"> </span></span></p><p style="margin-left: 0.0px;"><span style="color: black;"> </span>jsoncpp<span style="color: black;">是</span><span style="color: black;">c++</span><span style="color: black;">解析</span><span style="color: black;">JSON</span><span style="color: black;">串常用的解析库之一。其常用的类有：</span></p><p><span><span style="color: black;"> </span></span></p><ol><li><span style="color: black;">Json::Value    </span><span style="color: black;">表示所有的类型，比如</span><span style="color: black;">int、string、object、array</span><span style="color: black;">等，其支持的类型可以参考</span><span style="color: black;">Json:ValueType</span><span style="color: black;">中的值。</span></li><li><span style="color: black;">Json::Reader  </span><span style="color: black;">将</span><span style="color: black;">json</span><span style="color: black;">文件流或字符串解析到</span><span style="color: black;">Json::Value，</span><span style="color: black;">主要函数有</span><span style="color: black;">Parse</span><span style="color: black;">。</span></li><li><span style="color: black;">Json::Writer  </span><span style="color: black;">将</span><span style="color: black;">Json::Value</span><span style="color: black;">转化成字符串流，注意它的两个子类：</span><span style="color: black;">Json::FastWriter</span><span style="color: black;">和</span><span style="color: black;">Json::StyleWriter</span><span style="color: black;">，分别输出不带格式的</span><span style="color: black;">json</span><span style="color: black;">和带格式的</span><span style="color: black;">json</span><span style="color: black;">。</span></li><li><span style="color: black;">Json::Value::Members</span><span style="color: black;">主要用于以</span><span style="color: black;">STL</span><span style="color: black;">风格解析</span><span style="color: black;">JSON</span><span style="color: black;">数组。</span><span style="color: black;">Members</span><span style="color: black;">其实是</span><span style="color: black;">typedefvector</span><span style="color: black;">而已。</span></li></ol><p><span><span style="color: black;"> </span></span></p><p><span style="color: black;"> 示例代码：</span></p><p><span><span style="color: black;"> </span></span></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><td class="confluenceTd"><div class="code panel" style="border-width: 1px;"><div class="codeHeader panelHeader" style="border-bottom-width: 1px;"><b>C++ 读取JSON示例</b></div><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: cpp; gutter: false" style="font-size:12px;">void load()
+{
+	// 读取文件
+    std::ifstream ifs;
+    ifs.open(&quot;json.txt&quot;);
+    if(!ifs.is_open())
+		return;
+	Json::Reader reader;
+	Json::Value root;
+ 
+	// 解析
+	if (!reader.parse(ifs, root, false))
+		std::cout &lt;&lt; &quot;json parse error!&quot;;
+	// 获取json内容
+	// 获取三个pair
+	std::string first = root[&quot;firstName&quot;].asString();
+	std::cout &lt;&lt; first &lt;&lt; std::endl;
+	std::string last = root[&quot;lastName&quot;].asString();
+	std::cout &lt;&lt; last &lt;&lt; std::endl;
+	int age = root[&quot;age&quot;].asInt();
+	std::cout &lt;&lt; age &lt;&lt; std::endl;
+ 
+	// 获取一个对象
+	Json::Value address = root[&quot;address&quot;];
+	std::cout &lt;&lt; &#39;\t&#39;  &lt;&lt; address[&quot;streetAddress&quot;].asString() &lt;&lt; std::endl;
+	std::cout &lt;&lt; &#39;\t&#39;  &lt;&lt; address[&quot;city&quot;].asString() &lt;&lt; std::endl;
+	std::cout &lt;&lt; &#39;\t&#39;  &lt;&lt; address[&quot;state&quot;].asString() &lt;&lt; std::endl;
+	std::cout &lt;&lt; &#39;\t&#39;  &lt;&lt; address[&quot;postalCode&quot;].asString() &lt;&lt; std::endl;
+ 
+	// 获取一个list
+	Json::Value arrayObj = root[&quot;phoneNumber&quot;];
+	for (int i = 0; i&lt;arrayObj.size(); i++)
+	{
+		std::cout &lt;&lt; &quot;\t\t&quot; &lt;&lt; arrayObj[i][&quot;type&quot;].asString();
+		std::cout &lt;&lt; &quot;: &quot;&lt;&lt; arrayObj[i][&quot;number&quot;].asString();
+		std::cout &lt;&lt; std::endl;
+	}
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </pre>
+</div></div><p> </p><p> </p></td><td class="confluenceTd"><div class="code panel" style="border-width: 1px;"><div class="codeHeader panelHeader" style="border-bottom-width: 1px;"><b>C++ 保存JSON示例</b></div><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: cpp; gutter: false" style="font-size:12px;">//{
+//    &quot;firstName&quot;: &quot;John&quot;,
+//    &quot;lastName&quot;: &quot;Smith&quot;,
+//    &quot;age&quot;: 25,
+//    &quot;address&quot;: {
+//        &quot;streetAddress&quot;: &quot;21 2nd Street&quot;,
+//        &quot;city&quot;: &quot;New York&quot;,
+//        &quot;state&quot;: &quot;NY&quot;,
+//        &quot;postalCode&quot;: &quot;10021&quot;
+//    },
+//    &quot;phoneNumber&quot;: [
+//        {&quot;type&quot;: &quot;home&quot;, &quot;number&quot;: &quot;212 555-1234&quot;},                                
+//        {&quot;type&quot;: &quot;fax&quot;, &quot;number&quot;: &quot;646 555-4567&quot;}
+//    ],
+//    &quot;gender&quot;:{&quot;type&quot;:&quot;male&quot;}
+//}
+
+
+void save()
+{
+	Json::Value root;
+ 
+	// 三个pair
+	root[&quot;firstName&quot;] = &quot;John&quot;;
+	root[&quot;lastName&quot;] = &quot;Smith&quot;;
+	root[&quot;age&quot;] = &quot;25&quot;;
+	
+	// 一个对象
+	Json::Value addr;
+	addr[&quot;streetAddress&quot;] = &quot;21 2nd Street&quot;;
+	addr[&quot;city&quot;] = &quot;New York&quot;;
+	addr[&quot;state&quot;] = &quot;NY&quot;;
+	addr[&quot;postalCode&quot;] = &quot;10021&quot;;
+	root[&quot;address&quot;] = addr;
+ 
+	// 一个list
+	Json::Value arrayObj;
+	Json::Value item1, item2;
+	item1[&quot;type&quot;] = &quot;home&quot;;
+	item1[&quot;number&quot;] = 51077788;
+	arrayObj.append(item1);
+	item2[&quot;type&quot;] = &quot;fax&quot;;
+	item2[&quot;number&quot;] = &quot;646 555-4567&quot;;
+	arrayObj.append(item2);
+	root[&quot;phoneNumber&quot;] = arrayObj;
+ 
+	// 控制台输出结果
+	std::string out = root.toStyledString();
+	std::cout &lt;&lt; out &lt;&lt; std::endl;
+	return;
+}
+
+</pre>
+</div></div></td></tr></tbody></table></div><p><span><span style="color: black;"><br /></span></span></p><h1 id="Json学习-JSONSpirit">JSON Spirit</h1><p><a href="http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented#stream" class="external-link" rel="nofollow">http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented#stream</a></p><h1 id="Json学习-参考"><strong><span style="color: rgb(0,0,0);">参考</span></strong></h1><p><a href="http://en.wikipedia.org/wiki/JSON" class="external-link" rel="nofollow">http://en.wikipedia.org/wiki/JSON</a></p><p><a href="http://www.json.org/" class="external-link" rel="nofollow">http://www.json.org/</a></p><p><a href="http://en.wikipedia.org/wiki/JSON-RPC" class="external-link" rel="nofollow">http://en.wikipedia.org/wiki/JSON-RPC</a></p><p> </p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/8224807/8749057.rar">jsoncpp-src-0.5.0.rar</a> (application/octet-stream)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://10.30.1.104:8090/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on 2015-10-30 12:39:20</small></p>
+            </div>
+        </div>     </body>
+</html>

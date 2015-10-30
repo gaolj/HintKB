@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>内部资料 : 2013-11-08</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            内部资料 : 2013-11-08
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on 2013-11-11 by <font color="#0050B2">gaolj</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">JIRA</th><th class="confluenceTh"><img class="wysiwyg-unknown-macro" src="plugins/servlet/confluence/placeholder/unknown-macro"/> </th></tr><tr><td class="confluenceTd"><span style="color: rgb(0,51,102);">svn版本</span></td><td class="confluenceTd"><span>2142</span></td></tr><tr><td class="confluenceTd">代码单元</td><td class="confluenceTd">ufrmEditLocalGame.gas </td></tr><tr><td colspan="1" class="confluenceTd">代码行数</td><td colspan="1" class="confluenceTd">1710行</td></tr><tr><td class="confluenceTd"><span style="color: rgb(0,51,102);">日期</span></td><td class="confluenceTd">2013-11-08 </td></tr><tr><td class="confluenceTd"><span style="color: rgb(0,51,102);">问题</span></td><td class="confluenceTd"><p>try<br />png := TPngImage.Create;<br />if g_PngDataFileEx.GetGameIconByGameLocalID(GameRec.GetLocalID, png) then<br />imgIcon.Picture.Assign(png);<br />except<br />png.free;<br />end;</p></td></tr><tr><td colspan="1" class="confluenceTd">分析</td><td colspan="1" class="confluenceTd"><p>如果try过程没有问题，png不会释放， except改成Finally</p></td></tr></tbody></table></div><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">JIRA</th><th class="confluenceTh"> </th></tr><tr><td class="confluenceTd"><span style="color: rgb(0,51,102);">svn版本</span></td><td class="confluenceTd">2161</td></tr><tr><td class="confluenceTd">代码单元</td><td class="confluenceTd">ufrmEditServer.pas</td></tr><tr><td class="confluenceTd"><span style="color: rgb(0,51,102);">日期</span></td><td class="confluenceTd">2013-11-08 </td></tr><tr><td class="confluenceTd"><span style="color: rgb(0,51,102);">问题</span></td><td class="confluenceTd"><p>aDiskUseList := TDictionary&lt;Char, Integer&gt;.Create();<br />.....<br />try<br />finally<br />end;</p></td></tr><tr><td colspan="1" class="confluenceTd">分析</td><td colspan="1" class="confluenceTd"><p>aDiskUseList对象没有free掉</p></td></tr></tbody></table></div><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">JIRA</th><th class="confluenceTh"><img class="wysiwyg-unknown-macro" src="plugins/servlet/confluence/placeholder/unknown-macro"/> <img class="wysiwyg-unknown-macro" src="plugins/servlet/confluence/placeholder/unknown-macro"/></th></tr><tr><td colspan="1" class="confluenceTd">审核人</td><td colspan="1" class="confluenceTd">高黎峻</td></tr><tr><td class="confluenceTd">代码单元</td><td class="confluenceTd"> </td></tr><tr><td colspan="1" class="confluenceTd">代码行数</td><td colspan="1" class="confluenceTd"> </td></tr><tr><td class="confluenceTd"><span style="color: rgb(0,51,102);">设计</span></td><td class="confluenceTd"><a href="http://jira.hintsoft.com.cn:8090/pages/viewpage.action?pageId=6193382" class="external-link" rel="nofollow">http://jira.hintsoft.com.cn:8090/pages/viewpage.action?pageId=6193382</a></td></tr><tr><td class="confluenceTd"><span style="color: rgb(0,51,102);">问题</span></td><td class="confluenceTd"><p> </p></td></tr><tr><td colspan="1" class="confluenceTd">分析</td><td colspan="1" class="confluenceTd"><p> </p></td></tr></tbody></table></div><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">JIRA</th><th class="confluenceTh"> <img class="wysiwyg-unknown-macro" src="plugins/servlet/confluence/placeholder/unknown-macro"/></th></tr><tr><td colspan="1" class="confluenceTd">审核人</td><td colspan="1" class="confluenceTd">高黎峻、张超、倪建良</td></tr><tr><td class="confluenceTd">代码单元</td><td class="confluenceTd"><span>cs_dm_game.cpp、</span><span>cs_dmh_game.cpp、cs_datamanager.cpp、cs_main.cpp</span></td></tr><tr><td colspan="1" class="confluenceTd">代码行数</td><td colspan="1" class="confluenceTd">100</td></tr><tr><td class="confluenceTd"><span style="color: rgb(0,51,102);">设计</span></td><td class="confluenceTd"><a href="http://jira.hintsoft.com.cn:8090/pages/viewpage.action?pageId=6193359" class="external-link" rel="nofollow">http://jira.hintsoft.com.cn:8090/pages/viewpage.action?pageId=6193359</a></td></tr><tr><td class="confluenceTd"><span style="color: rgb(0,51,102);">问题</span></td><td class="confluenceTd"><p> </p></td></tr><tr><td colspan="1" class="confluenceTd">分析</td><td colspan="1" class="confluenceTd"><p> </p></td></tr></tbody></table></div><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">JIRA</th><th class="confluenceTh"> <img class="wysiwyg-unknown-macro" src="plugins/servlet/confluence/placeholder/unknown-macro"/></th></tr><tr><td colspan="1" class="confluenceTd">审核人</td><td colspan="1" class="confluenceTd"><span>高黎峻、张超、倪建良</span></td></tr><tr><td class="confluenceTd">代码单元</td><td class="confluenceTd">cs_dm_game.cpp、<span>cs_dmh_game.cpp、cs_datamanager.cpp、cs_main.cpp</span></td></tr><tr><td colspan="1" class="confluenceTd">代码行数</td><td colspan="1" class="confluenceTd">200</td></tr><tr><td class="confluenceTd"><span style="color: rgb(0,51,102);">设计</span></td><td class="confluenceTd"><a href="http://jira.hintsoft.com.cn:8090/pages/viewpage.action?pageId=4884733" class="external-link" rel="nofollow">http://jira.hintsoft.com.cn:8090/pages/viewpage.action?pageId=4884733</a></td></tr><tr><td class="confluenceTd"><span style="color: rgb(0,51,102);">问题</span></td><td class="confluenceTd"><p> </p></td></tr><tr><td colspan="1" class="confluenceTd">分析</td><td colspan="1" class="confluenceTd"><p> </p></td></tr></tbody></table></div><p><br />: </p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://10.30.1.104:8090/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on 2015-10-30 12:39:10</small></p>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,39 @@
+Imports System
+Imports EnvDTE
+Imports EnvDTE80
+Imports EnvDTE90
+Imports EnvDTE90a
+Imports EnvDTE100
+Imports System.Diagnostics
+
+Public Module Doxygen
+    Sub File()
+        '定义选择区域 
+        Dim DocSel As EnvDTE.TextSelection
+        '初始化选择区域是当前文档的选择
+        DocSel = DTE.ActiveDocument.Selection
+        '选择区域移动到文档的开头 
+        DocSel.StartOfDocument()
+        'DocSel.Text = "/*******************************************************************"
+        'DocSel.NewLine()
+        DocSel.Text = "/// Copyright (C), Hintsoft Corporation"
+        DocSel.NewLine()
+        DocSel.NewLine("/// ")
+        'DocSel.Text = "/// All rights reserved."
+        'DocSel.NewLine()
+        DocSel.Text = "/// @file    " + DTE.ActiveDocument.Name
+        DocSel.NewLine()
+        DocSel.Text = "/// @brief    "
+        DocSel.NewLine()
+        'DocSel.Text = "* @version    V1.0"
+        'DocSel.NewLine()
+        'DocSel.Text = "* @author    XX (XX@163.com)"
+        'DocSel.NewLine()
+        'DocSel.Text = "* @date    " + DateTime.Now.ToString()
+        'DocSel.NewLine()
+        'DocSel.Text = "* 修订说明 "
+        'DocSel.NewLine()
+        'DocSel.Text = "*******************************************************************/"
+        'DocSel.NewLine()
+    End Sub
+End Module

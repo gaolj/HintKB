@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>内部资料 : C++项目导入本地说明</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            内部资料 : C++项目导入本地说明
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on 2013-09-06 by <font color="#0050B2">gaolj</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout" data-atlassian-layout="{&quot;name&quot;:&quot;pagelayout-two&quot;,&quot;columns&quot;:[&quot;&quot;,&quot;&quot;],&quot;header&quot;:true,&quot;footer&quot;:true}"><div class="header"><div class="innerCell"><h1 id="C++项目导入本地说明-SVN项目导入本地说明" style="text-align: center;">SVN项目导入本地说明</h1></div></div><div class="columnLayout twoColumns"><div class="cell "><div class="innerCell"><h2 id="C++项目导入本地说明-1、浏览SVN代码库"><strong>1、</strong><strong>浏览SVN代码库</strong></h2><ul><li>SVN安装完毕后，在本地任意目录单击右键选择TortoiseSVN –&gt;Repo-bowser可以浏览代码库目录，如右图（1-1）所示:</li></ul><p> </p><p> </p><p> </p><ul><li>在弹出对话框中输入代码库URL：<span>https://192.160.101.102:8888/svn/XunShan/Cpp/</span> ,如右图（1-2）所示：</li></ul><p> </p><p> </p><p> </p><p> </p><p> </p><ul><li><span>单击<span>OK</span>弹出浏览窗口。如右图（1-3）所示</span><span> </span></li></ul><p style="margin-left: 30.0px;">其中存在如下目录树</p><p style="margin-left: 30.0px;">|-Cpp                                 //对应我们本地的xunshan目录。</p><p style="margin-left: 30.0px;">   |-include                         //为第三方头文件，或公用头文件</p><p style="margin-left: 30.0px;">   |-lib                               //第三方库文件目录，或公用库文件</p><p style="margin-left: 30.0px;">   |-run                             //run 为执行程序所在目录,包含执行文件和其他依赖文件               </p><p style="margin-left: 30.0px;">   |-ProjectName              //具体项目录</p><h2 id="C++项目导入本地说明-2、建立一个本地工作目录"><strong>2、</strong><strong>建立一个本地工作目录</strong></h2><ul><li>在E盘下新建目录E:\Work\xunshan，其中xunshan与代码库中的Cpp目录相对应。构成如下目录树:</li></ul><p style="margin-left: 30.0px;">|-Work</p><p style="margin-left: 30.0px;">    |-xunshan</p><p style="margin-left: 30.0px;">    |-pubwin</p><p style="margin-left: 30.0px;">    |-other…</p><h2 id="C++项目导入本地说明-3、导出公用文件"><strong>3</strong><strong>、导出公用文件</strong></h2><ul><li>公用文件是指，在Cpp目录下的include,lib和run目录下的所有文件。</li></ul><p style="margin-left: 30.0px;">在目录中按下右键后(您可以在Work目录的icon上按，也可进入Work目录后，在空白的地方按)，选择SVN checkout。<span>接着您可以看到如右图（3-1）所示画面：</span></p><p style="margin-left: 30.0px;"><span>其中<a href="http://tortoisesvn.net/docs/release/TortoiseSVN_zh_CN/tsvn-dug-checkout.html#tsvn-dug-checkout-depth" class="external-link" rel="nofollow">CheckoutDepth</a>, Omit externals, Revison均按默认配置。<br /></span></p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><ul><li>在单击OK之前我们可以单击 URL  of  repository右侧的浏览按钮进行确认，如右图（3-2）所示：</li></ul><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><ul><li>在Revision中我们选择Head revision表示最新的版本。 我们单击OK之后工程将被同步到本地。如右图（3-3）所示</li></ul><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><ul><li>用同样的方法我们需要将run 目录及 lib 目录 同步到本地。 注意必须保证目录层次与服务器上的层次相同。即include，lib， run   以及主工程目录在同一级。（这是为了保证在工程中使用相同的相对路径）。如右图（3-4） 所示</li></ul><p> </p><p> </p><h2 id="C++项目导入本地说明-4.CoreServerInterface工程导入本地"><strong>4. CoreServerInterface</strong><strong>工程导入本地</strong></h2><ul><li>工程的导入基本与公用文件的导入方法一致，区别在于将工程导入本地时只需导入trunk(主版本)目录下的内容，如右图（4-1）所示。</li></ul><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><h2 id="C++项目导入本地说明-5、本地环境配置"><strong>5</strong><strong>、本地环境配置</strong></h2><ul><li>打开CoreServerInterface.sln工程文件，重新生成</li></ul><p style="margin-left: 30.0px;">工程对包含目录和库目录进行了如下修改：</p><p style="margin-left: 30.0px;">在包涵目录中添加了如下目录，如右图(5-1)所示：</p><p style="margin-left: 30.0px;">..\include\boost\boost_1_51_0;</p><p style="margin-left: 30.0px;">..\include\log\log4cplus-1.1.2-rc1\include;</p><p style="margin-left: 30.0px;">..\include\log;</p><p style="margin-left: 30.0px;">..\include\zip;</p><p style="margin-left: 30.0px;">..\include\algo;</p><p style="margin-left: 30.0px;">..\include\json;</p><p style="margin-left: 30.0px;">..\include\xml;</p><p style="margin-left: 30.0px;">..\include\hintsoft</p><p> </p><p style="margin-left: 30.0px;">在库目录中添加如下库目录如右图（5-2）所示</p><p style="margin-left: 30.0px;">..\lib\3rdparty;</p><p style="margin-left: 30.0px;">..\lib\hintsoft</p><h2 id="C++项目导入本地说明-6、其它"><strong>6</strong><strong>、其它</strong></h2><ul><li>我们规定以..run/bin目录作为程序的输出目录，Debug版本均需保存为$(ProjectName)D，Release版本直接保存为$(ProjectName)</li></ul><p> </p><p style="margin-left: 30.0px;">相关帮助：</p><p>       tortoisesvn中文教程：<a class="external-link" href="http://tortoisesvn.net/docs/release/TortoiseSVN_zh_CN/tsvn-preface.html" rel="nofollow">http://tortoisesvn.net/docs/release/TortoiseSVN_zh_CN/tsvn-preface.html</a></p><p>      Subverson权威指南：<a href="http://jira.hintsoft.com.cn:8090/download/attachments/3900118/svnbook-1.6-zh-r3600.pdf?version=1&amp;modificationDate=1366940932000&amp;api=v2" class="external-link" rel="nofollow">svnbook-1.6-zh-r3600.pdf</a></p></div></div><div class="cell "><div class="innerCell"><p> </p><p><img class="confluence-embedded-image" src="attachments/4883425/5079135.jpg" data-image-src="attachments/4883425/5079135.jpg"></p><p>（1-1）</p><p> </p><p><img class="confluence-embedded-image" src="attachments/4883425/5079133.jpg" data-image-src="attachments/4883425/5079133.jpg"></p><p>(1-2)</p><p> </p><p><img class="confluence-embedded-image" src="attachments/4883425/5079134.jpg" data-image-src="attachments/4883425/5079134.jpg"></p><p>（1-3）</p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p> </p><p><img class="confluence-embedded-image" src="attachments/4883425/5079139.jpg" data-image-src="attachments/4883425/5079139.jpg"></p><p>（3-1）</p><p> </p><p><img class="confluence-embedded-image" src="attachments/4883425/5079140.jpg" data-image-src="attachments/4883425/5079140.jpg"></p><p>（3-2）</p><p> </p><p><img class="confluence-embedded-image" src="attachments/4883425/5079141.jpg" data-image-src="attachments/4883425/5079141.jpg"></p><p>（3-3）</p><p> </p><p> </p><p><img class="confluence-embedded-image" src="attachments/4883425/5079142.jpg" data-image-src="attachments/4883425/5079142.jpg"></p><p>(3-4)</p><p> </p><p><img class="confluence-embedded-image" src="attachments/4883425/5079143.jpg" data-image-src="attachments/4883425/5079143.jpg"></p><p>（4-1）</p><p> </p><p> </p><p><img class="confluence-embedded-image" src="attachments/4883425/5079144.jpg" data-image-src="attachments/4883425/5079144.jpg"></p><p>(5-1)</p><p> </p><p> </p><p> </p><p><img class="confluence-embedded-image" src="attachments/4883425/5079145.jpg" data-image-src="attachments/4883425/5079145.jpg"></p><p>(5-2)</p></div></div></div><div class="footer"><div class="innerCell"><p> </p></div></div></div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079126.doc">SVN项目导入本地详细说明.doc</a> (application/msword)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079125.doc">SVN项目导入本地详细说明.doc</a> (application/msword)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079128.doc">SVN项目导入本地说明.doc</a> (application/msword)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079127.doc">SVN项目导入本地说明.doc</a> (application/msword)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079132.png">image2013-6-28 19:23:55.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079137.jpg">1-2.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079138.jpg">1-3.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079136.jpg">1-1.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079135.jpg">1-1.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079133.jpg">1-2.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079134.jpg">1-3.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079139.jpg">3-2.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079140.jpg">3-3.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079141.jpg">3-5.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079142.jpg">3-6.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079143.jpg">4-1.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079144.jpg">include.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4883425/5079145.jpg">lib.jpg</a> (image/jpeg)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="comments" class="pageSectionTitle">Comments:</h2>
+                        </div>
+
+                        <table border="0" width="100%">
+                                                        <tr>
+                                <td >
+                                    <a name="comment-4884963"></a>
+                                    <font class="smallfont"><p>条理清楚，内容精练而明确</p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by gaolj at 2013-08-06 10:21:37
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </table>
+                    </div>
+                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://10.30.1.104:8090/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on 2015-10-30 12:39:10</small></p>
+            </div>
+        </div>     </body>
+</html>

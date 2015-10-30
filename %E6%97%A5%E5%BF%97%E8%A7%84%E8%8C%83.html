@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>内部资料 : 日志规范</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            内部资料 : 日志规范
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on 2013-02-16 by <font color="#0050B2">gaolj</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <p><div>
+<ul>
+    <li><a href='#id-日志规范-现状分析'><strong>现状分析</strong></a></li>
+    <li><a href='#id-日志规范-日志目的'><strong>日志目的</strong></a></li>
+    <li><a href='#id-日志规范-日志模块'><strong>日志模块</strong></a></li>
+    <li><a href='#id-日志规范-规范纲要'><strong>规范纲要</strong></a></li>
+    <li><a href='#id-日志规范-日志输出范例'><strong>日志输出范例</strong></a></li>
+    <li><a href='#id-日志规范-高级应用与技巧'><strong>高级应用与技巧</strong></a></li>
+</ul></div></p><h1 id="id-日志规范-现状分析"><strong>现状分析</strong></h1><p><strong>二个字：多，乱</strong></p><p><strong>糟糕的日志：<a href="attachments/2228501/2523191.rar">log.rar</a><br />较好的日志：<a href="attachments/2228501/2523192.log">eviewcomm.log</a></strong></p><p><strong>现状总结：<a href="attachments/2228501/2523194.xlsx">&#26085;&#24535;&#29616;&#29366;.xlsx</a><br /></strong></p><p>    
+<div class="office-container">
+<a href="/plugins/servlet/confluence/editinword/2228501/attachments/日志现状.xlsx" class="confluence-button office-editable" data-use-path-auth="false">Edit Document</a>    <div class="office-document">
+    <div id="panel1" style='display:block'>
+<table class="offconn-17" style='border:1pt solid #c0c0c0;border-collapse:collapse;table-layout:fixed;width:1158' border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" >
+<col width="88" />
+<col width="304" />
+<col width="391" />
+<col width="157" />
+<col width="218" />
+<tr style='height:19.0px'><td class="oc-0">当前问题</td><td class="oc-0">具体表现</td><td class="oc-0">后果</td><td class="oc-0">目标</td><td class="oc-0">解决方案</td></tr>
+<tr style='height:114.0px'><td class="oc-0">找不到日志</td><td class="oc-0">每个应用程序有一个或多个输出目的地
+动态库也有单独日志
+日志文件到处乱放
+文件名不规范</td><td class="oc-0">1、找不到日志在哪里。给他人找日志造成困惑。
+   不知道输出在文件中？控制台？Debugview？
+   不知道日志文件在哪里。
+   一个DLL被多个程序调用，不知道DLL输出的日志是在哪个程序中被调用的。
+2、需要打开多个文件，不方便从多个日志文件中找出错点</td><td class="oc-0">每个exe程序只有一个日志文件</td><td class="oc-0"></td></tr>
+<tr style='height:38.0px'><td class="oc-0">大小数量</td><td class="oc-0">每个文件大小、总的文件数量，没有限制</td><td class="oc-0">占用很大硬盘空间</td><td class="oc-0">单个文件有大小限制
+过期日志要自动删除</td><td class="oc-0">DailyRollingFileAppender</td></tr>
+<tr style='height:38.0px'><td class="oc-0">输出目的地</td><td class="oc-0">文件，控制台，Debugview，IDE </td><td class="oc-0">实际使用环境的复杂性，有些问题出现是偶尔的不经常重现的，Debugview、控制台形式不能保存出错时的信息，不适合发布时用 </td><td class="oc-0">日志要能保存，以文件或网络输出</td><td class="oc-0">Appender</td></tr>
+<tr style='height:19.0px'><td class="oc-0">输出格式</td><td class="oc-0">五花八门</td><td class="oc-0">不方便查看</td><td class="oc-0">格式要统一，整齐</td><td class="oc-0">Layout</td></tr>
+<tr style='height:57.0px'><td class="oc-0">输出内容</td><td class="oc-0">什么都有，包括一些敏感信息、不需要输出的低级别日志信息。日志内容太庞大</td><td class="oc-0">重要线索淹没在没用的日志信息中，有用信息难以找到
+泄漏敏感信息
+造成日志文件太大</td><td class="oc-0">以最少的输出内容精确表达错误信息</td><td class="oc-0">等级</td></tr>
+</table>
+<style>
+table.offconn-17 tr td.oc-0 {
+ border-bottom : 1pt solid #000000; border-right : 1pt solid #000000; border-top : 1pt solid #000000; border-left : 1pt solid #000000; color : #000000; background : #FFFFFF; font-family : 微软雅黑; font-size : 9.0pt; 
+font-style : normal; font-weight : normal; padding-left : 1px;
+padding-right : 1px; padding-top : 1px; text-align : justify; vertical-align : middle  }
+</style>
+</div>
+
+    </div>
+</div>
+</p><h1 id="id-日志规范-日志目的"><strong>日志目的</strong></h1><p> </p><p><strong>一、在开发、测试和使用时能及时、方便、准确的找到问题</strong></p><ol><li><strong>方便性：通过查看日志，大部分问题能马上找到原因所在。免掉调试程序等复杂工作。</strong></li><li><strong>及时性：日志可以通过网络直接上报到日志中心。</strong></li><li><strong>准确性：日志记录准确得当的话，能直接准确定位出错原因。</strong></li></ol><p><strong>对于程序员，可在编码时调试程序用，也可以在测试和发布后跟踪程序实际运行情况。测试阶段和发布使用时，是不能单步调试的，所以日志是对单步调试的有效补充。</strong><br /><strong>对于测试、客服等其它部门来说，日志又是与研发沟通和解决问题的语言。许多情况下测试、客服只要一看日志，就能告诉研发问题出在哪里。提高发现问题、解决问题的效率。</strong></p><p><strong>二、以往经验</strong></p><p><strong>调试程序时，设断点，看变量值。缺点：慢，效率低。</strong><br /><strong>通过printf函数向控制台或IDE窗口输出，只适合程序员编写代码时用，适用性低。</strong><br /><strong>用户使用过程中，应该用文件形式输出日志。用户使用环境的复杂性决定了你的程序一般不可能完全按照理想状态或按照你认定好的步骤执行。要跟踪程序运行的轨迹，要记录下发生的异常和错误。</strong></p><h1 id="id-日志规范-日志模块"><strong>日志模块</strong></h1><p><strong><strong>要规范、灵活地输出日志，解决现在记录日志的各类弊病，不需要也不应该自己实现日志模块。<br /></strong><strong><strong>还需要考虑的问题：多线程输出时的互斥问题，输出时的效率问题。<br />开源的，被验证过的，性能和稳定性有保证的第三方模块。</strong></strong></strong></p><p><strong>实现日志功能的模块，最出名的要数JAVA的log4j，派生出了各类其它语言的类似模块：log4c,log4cpp,log4net等，功能基本类似，都很强大、配置灵活</strong></p><p><strong>从低到高分为五个等级：TRACE、DEBUG、INFO、WARN、ERROR、FATAL</strong></p><p><strong>级别使用说明：<a href="attachments/2228501/2523195.xlsx">&#26085;&#24535;&#32423;&#21035;.xlsx</a><br /></strong></p><p>    
+<div class="office-container">
+<a href="/plugins/servlet/confluence/editinword/2228501/attachments/日志级别.xlsx" class="confluence-button office-editable" data-use-path-auth="false">Edit Document</a>    <div class="office-document">
+    <div id="panel1" style='display:block'>
+<table class="offconn-18" style='border:1pt solid #c0c0c0;border-collapse:collapse;table-layout:fixed;width:993' border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" >
+<col width="68" />
+<col width="88" />
+<col width="220" />
+<col width="220" />
+<col width="397" />
+<tr style='height:19.0px'><td class="oc-0">级别</td><td class="oc-0">含义</td><td class="oc-0">使用场景</td><td class="oc-0">示例代码</td><td class="oc-0">应用示例</td></tr>
+<tr style='height:171.0px'><td class="oc-0">TRACE</td><td class="oc-0">跟踪信息</td><td class="oc-0">函数出入口处</td><td class="oc-0">function()
+{
+    logger.trace(&quot;BGN 函数&quot;);
+    if (条件1)
+         logger.trace(&quot;if 条件1&quot;);
+    else
+         logger.trace(&quot;else 条件1&quot;);
+    logger.trace(&quot;END 函数&quot;);
+}</td><td class="oc-0">完全跟踪程序执行的每一步骤，辅助崩溃检查。
+
+每个if\else、每个函数出入口添加很麻烦，代码也罗唆难看，可以用面向方面编程（AOP）方式自动在编译时自动插入日志代码。AspectJ、AspectC++</td></tr>
+<tr style='height:38.0px'><td class="oc-0">DEBUG</td><td class="oc-0">调试信息</td><td class="oc-0">跟踪在执行过程中变量的值
+类似于调试过程中断点的作用</td><td class="oc-0"></td><td class="oc-0"></td></tr>
+<tr style='height:76.0px'><td class="oc-0">INFO</td><td class="oc-0">关键信息</td><td class="oc-0">正确执行的关键信息</td><td class="oc-0"></td><td class="oc-0">logger.info(&quot;无盘服务器起动&quot;) 
+logger.info(&quot;获取配置文件成功&quot;)
+logger.info(&quot;数据备份成功&quot;)
+logger.info(&quot;无盘服务器正常退出&quot;)</td></tr>
+<tr style='height:38.0px'><td class="oc-1">WARN</td><td class="oc-0">警告</td><td class="oc-0">不影响程序正常运行的错误
+可以忽略的错误</td><td class="oc-0"></td><td class="oc-0">UI层的错误</td></tr>
+<tr style='height:38.0px'><td class="oc-1">ERROR</td><td class="oc-0">错误</td><td class="oc-0">正常运行时不应该发生的错误此，类错误发生后会影响到程序执行的流程</td><td class="oc-0"></td><td class="oc-0">文件操作、网络通信、参数错误、格式不对等，业务层的错误</td></tr>
+<tr style='height:57.0px'><td class="oc-1">FATAL</td><td class="oc-0">致命错误</td><td class="oc-0">任何影响到程序不能继续正常运行的错误
+</td><td class="oc-0"></td><td class="oc-0">logger.fatal(&quot;获取配置文件成功失败，程序退出&quot;) 
+logger.fatal(&quot;和中心握手失败，程序退出&quot;)</td></tr>
+</table>
+<style>
+table.offconn-18 tr td.oc-0 {
+ border-bottom : 1pt solid #000000; border-right : 1pt solid #000000; border-top : 1pt solid #000000; border-left : 1pt solid #000000; color : #000000; background : #FFFFFF; font-family : 微软雅黑; font-size : 9.0pt; 
+font-style : normal; font-weight : normal; padding-left : 1px;
+padding-right : 1px; padding-top : 1px; text-align : justify; vertical-align : middle  }
+table.offconn-18 tr td.oc-1 {
+ border-bottom : 1pt solid #000000; border-right : 1pt solid #000000; border-top : 1pt solid #000000; border-left : 1pt solid #000000; color : #FF0000; background : #FFFFFF; font-family : 微软雅黑; font-size : 9.0pt; 
+font-style : normal; font-weight : normal; padding-left : 1px;
+padding-right : 1px; padding-top : 1px; text-align : justify; vertical-align : middle  }
+</style>
+</div>
+
+    </div>
+</div>
+</p><p><br /><strong>Log4j有三个主要组件：logger、appender和layout</strong></p><ol><li><strong>Logger：记录器，直接操作它输出日志。</strong></li><li><strong>Appender：输出目的地。文件、控制台、GUI界面、通过网络输出到服务器、数据库、(windows系统事件)和UNIX的Syslog</strong></li><li><strong>Layout：布局格式，格式化日志输出。</strong></li></ol><h1 id="id-日志规范-规范纲要"><strong>规范纲要</strong></h1><p><strong><strong>规范的日志实例：<a href="attachments/2228501/2523192.log">eviewcomm.log</a></strong></strong></p><p><strong><strong>1、<strong>日志文件存放目录</strong></strong></strong></p><p><span style="font-weight: 900;"><span>应用程序、驱动等，</span>统一存放在安装目录下log目录。</span></p><p><strong><strong><strong>2、日志文件名</strong></strong></strong></p><p><strong><strong><strong>程序名-时间.log</strong></strong></strong></p><p><strong><strong><strong>3、<strong><strong><strong>日志文件大小和保留数量</strong></strong></strong></strong></strong></strong></p><p><span style="font-weight: 900;">输出少的：单个文件并设大小。</span></p><p><span style="font-weight: 900;">输出多的：设定文件数量和每个大小</span></p><p><span style="font-weight: 900;">4、输出等级</span></p><p><strong>发布前，日志输出级别为debug或trace</strong></p><p><strong>发布后，日志输出级别为info</strong></p><p><strong>目的：没有出错时日志输出应该是很少或尽可能没有，一旦程序执行有错误或不按正常情况执行下，要有日志输出，并给出出错原因。</strong></p><p><strong>5、动态库日志</strong></p><p><strong>要求：和主程序日志输出在一个文件中，不能一个动态库就有一个日志文件。</strong></p><p><strong>a)由调用方程序负责输出日志。</strong></p><p><strong>对于功能简单的动态库，让调用方先调用此DLL输出函数设置一个用于日志输出的回调函数，在动态库里直接调用这个回调函数，让调用方程序负责输出日志。</strong><br /><strong>typedef void (*LOGGER_CALLBACK)(const int level, const char* msg);</strong><br /><strong>extern &quot;C&quot; __declspec(dllexport) setLogger(LOGGER_CALLBACK logger_callback);</strong><br /><strong>那么在DLL中任何需要输出日志的地方，直接调用<strong>logger_callback</strong>(debug, &quot;调试信息&quot;);</strong></p><p><strong>b)使用在主程序中实例化过的logger进行日志输出工作。</strong><br /><strong>主程序中，通过Logger::create(&quot;FileLogger&quot;, Logger::PRIO_DEBUG)，已经实例化过“FileLogger”这个记录器了</strong><br /><strong>在DLL中，通过“FileLogger”这个记录器记录日志。Logger::get(&quot;FileLogger&quot;).debug(&quot;调试信息&quot;);</strong></p><h1 id="id-日志规范-日志输出范例"><strong>日志输出范例</strong></h1><p><strong>1、程序运行时的整体概况</strong></p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Eclipse; brush: java; gutter: false" style="font-size:12px;">void main(void)
+{
+	logger.info(&quot;起动游戏登录器&quot;);	// 程序起动，info
+	logger.info(&quot;系统信息&quot;);		// 可选
+	logger.info(&quot;硬件信息&quot;);		// 可选
+	logger.info(&quot;网络信息&quot;);		// 可选
+
+	try 
+	{
+		logger.info(&quot;登录中心地址（%s:%d）&quot;, host, port);	// 程序起动，主要信息
+		// 运行中...
+	}
+	catch(exception e)
+	{
+		logger.fatal(&quot;游戏登录器异常退出(%s)&quot;, e.why());	// 程序异常退出，fatal
+		return;
+	}
+	logger.info(&quot;退出游戏登录器&quot;);	// 正常退出，info
+}
+ 
+正常情况
+2012-12-19 14:09:31.6 0  INFO	起动游戏登录器
+2012-12-19 14:09:31.6 0  INFO	系统信息(Windows XP sp3)
+2012-12-19 14:09:31.6 0  INFO	硬件信息(内存2G,硬盘2T)
+2012-12-19 14:09:31.6 0  INFO	网络信息(MAC:AA-BB-CC-FF-EE-FF,IP:192.168.1.1)
+2012-12-19 14:09:31.6 0  INFO 	登录中心地址（account.9igame.com:8088）
+2012-12-19 14:09:31.6 0  INFO	退出游戏登录器
+
+异常情况
+2012-12-19 14:09:31.6 0  INFO	起动游戏登录器
+2012-12-19 14:09:31.6 0  FATAL	游戏登录器异常退出(Access violation)</pre>
+</div></div><p><strong>2、函数参数、调用失败、捕获异常</strong></p><p> </p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Eclipse; brush: cpp; collapse: true; gutter: false" style="font-size:12px;">bool logon(string host, int port)
+{
+	logger.debug(&quot;登录参数	host(%s)	port(%d)&quot;, host, port);	// 函数参数，debug
+	if (!isValidIp(host))
+	{
+		logger.warn(&quot;登录参数	host(%s)&quot;, host);		// 传入参数验证不合法，warn
+		return false;
+	}
+	try 
+	{
+		Socket sock;
+		if (!sock.create())
+		{
+			logger.error(&quot;登录 sock.create(%s)&quot;, sock.getError());	// 任何函数调用失败，error，给出原因!
+			return false;
+		}
+		if (!sock.connect(host, port))
+		{
+			logger.error(&quot;登录 sock.connect(%s:%d)	(%s)&quot;, host, port, sock.getError());	// 任何函数调用失败，error，给出原因!
+			return false;
+		}
+		int received;
+		while(received = sock.receive())
+		{
+			logger.debug(&quot;登录	sock.receive(%d)&quot;, received);
+		}
+		string user = &quot;用户甲&quot;;
+		string pswd = &quot;111111&quot;;
+		int result = checkUser(user, pswd);
+		if (result != 0)
+		{
+			logger.error(&quot;登录 checkUser (%s)(%s)&quot;, user, getLogonError());	// 任何函数调用失败，error，给出原因!
+		}
+		else
+			return true;
+	}
+	catch(exception e)
+	{
+		logger.error(&quot;登录 exception(%s)&quot;, e.why());	// 任何捕获的异常，error
+		return;
+	}
+}
+/*
+ *返回值：
+	0		成功
+	1		没有些用户
+	2		密码错误
+	3		此用户不允许登录
+*/
+int checkUser(string user, string pswd)
+{
+}
+string getLogonError(int err)
+{
+	if (1 == err)
+		return &quot;没有些用户&quot;;
+	if (2 == err)
+		return &quot;密码错误&quot;;
+	if (3 == err)
+		return &quot;此用户不允许登录&quot;;
+}
+
+
+正常情况debug级
+2012-12-19 14:09:31.6 0  DEBUG 	登录参数	host(account.9igame.com)	port(8088)
+2012-12-19 14:09:31.6 0  DEBUG	登录	sock.received(1024)
+2012-12-19 14:09:31.6 0  DEBUG	登录	sock.received(1024)
+2012-12-19 14:09:31.6 0  DEBUG	登录	sock.received(1024)
+正常情况error级
+#没有任何输出
+
+异常情况
+2012-12-19 14:09:31.6 0  DEBUG 	登录参数	host(account.9igame.com)	port(8088)
+2012-12-19 14:09:31.6 0  WARN 	登录参数	host()
+2012-12-19 14:10:55.2 0  ERROR	登录	exception(登录中心地址DNS解析失败)
+2012-12-19 14:10:55.2 0  ERROR	登录	sock.connect(ccount.9igame.com:8088)	(由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。)
+</pre>
+</div></div><h1 id="id-日志规范-高级应用与技巧"><strong>高级应用与技巧</strong></h1><p> </p><ol><li><strong><strong>确定时长：</strong>为了调优效率，需要知道一段代码运行了多少时间，可在头尾加上日志，根据日志输出的时间相减后可以确定</strong></li><li><strong>查找<strong><strong>崩溃：</strong></strong>在函数入口和出口处加上debug级日志，如果程序崩溃，由于入口处有debug输出，而出口处没有，可以方便定位引起<strong>崩溃的<strong>函数</strong></strong></strong></li><li><strong><strong>跟踪使用</strong>：中心可设定任一网吧，要求它是否实时上传日志，以及日志输出级别。当网吧端程序起动后从中心得到日志配置，按要求把有用日志上传到中心</strong></li><li><strong><strong><strong><strong>简化代码：</strong></strong>对于较多的debug输出，为了简化代码，可以用LOGGER_DEBUG(&quot;&quot;);或AOP方式</strong></strong></li><li><strong>提高效率：对于执行效率要求非常高的代码，特别是服务器端程序，可采取以下措施：</strong></li></ol><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: cpp; gutter: false" style="font-size:12px;">例：
+对于一个循环执行很多次的for循环
+for(int i = 0; i &lt; 1000; i++)
+{
+	logger.debug(&quot;调试信息&quot;);
+}
+对于经常要被反复调用的函数
+function()
+{
+	logger.debug(&quot;调试信息&quot;);
+}</pre>
+</div></div><p> </p><p><strong>那么即便日志输出级别是大于debug而不会有日志输出，但每次执行到logger.debug(&quot;调试信息&quot;)时，也要通过logger.debug函数调用，进行条件判断来决定是否要输出，影响性能。</strong><br /><strong>改进方案一：减少输出</strong><br /><strong>对于必须要输出日志的，应该减少输出次数，比如每循环100次后输出一次日志</strong></p><p><strong>改进方案二：条件编译</strong></p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: cpp; gutter: false" style="font-size:12px;">#ifdefine _DEBUG
+#define LOGGER_DEBUG(msg) logger.debug(msg, __FILE__, __LINE__);
+#else
+#define LOGGER_DEBUG
+ 
+以条件编译的方式，在DEBUG版本中保留日志用于测试和跟踪，在Release版中去掉。
+例：
+LOGGER_DEBUG(&quot;调试信息&quot;);
+2012-12-19 14:09:31.6 0 DEBUG 调试信息 Test.cpp:188</pre>
+</div></div><p><strong><br /></strong></p><p><strong><br /></strong></p><p> </p><p> </p><p> </p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523181.xlsx">日志规范.xlsx</a> (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523177.xlsx">日志规范.xlsx</a> (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523183.xlsx">日志规范2.xlsx</a> (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523193.xlsx">日志规范2.xlsx</a> (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523191.rar">log.rar</a> (application/x-upload-data)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523200.log">eviewcomm.log</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523182.xlsx">日志规范2.xlsx</a> (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523196.xlsx">日志现状.xlsx</a> (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523197.xlsx">日志级别.xlsx</a> (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523198.xlsx">日志现状.xlsx</a> (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523199.xlsx">日志级别.xlsx</a> (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523194.xlsx">日志现状.xlsx</a> (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523195.xlsx">日志级别.xlsx</a> (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523221.log">eviewcomm.log</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523222.log">eviewcomm.log</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/2228501/2523192.log">eviewcomm.log</a> (text/plain)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://10.30.1.104:8090/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on 2015-10-30 12:39:19</small></p>
+            </div>
+        </div>     </body>
+</html>

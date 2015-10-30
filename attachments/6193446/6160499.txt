@@ -1,0 +1,58 @@
+int main
+{	
+	int i = 0;		// 缩进使用Tab（大小为4个空格），不允许用空格来缩进
+	int coutn = 0;	// 多行注释，“//”的前面尽量通过缩进对齐，后面加一空格
+ 					// 变量声明结束后加空行以示强调
+	if (i < 10)	   // if,for,while等关键字后加一空格
+	{
+		int *p = a;// ! ~ ++ -- * &等单目运算符前后不加空格
+	}
+	else
+	{
+		return 0;	// 单条语句也要加括号
+	}
+ 					// 主要功能代码块间加空行，表示区分
+	for (i = 0; i < 10; i++)	// 双目操作符前后加空格> < + = += & && || << >>
+	{
+	}
+	
+	// 语句结束符号';'后，如果没有注释，则不能有任何不可见字符（如：空格、tab）
+	point.x = 0;
+	point.y = 0;	// 每一行只准书写一条语句
+ 
+	// 此条注释表示下面代码段实现的逻辑
+	function1();	
+	function2();	
+
+	// 表示下面代码的注释要与上面的代码隔开
+	function3();
+ 
+	// 代码行不要过长
+	// 长表达式要在低优先级操作符处拆分成新行，操作符放在新行之首（以便突出操作符）
+	// 拆分出的新行要进行适当的缩进，使排版整齐，语句可读
+	if ((very_longer_variable1 >= very_longer_variable12)
+		&& (very_longer_variable3 <= very_longer_variable14)
+		&& (very_longer_variable5 <= very_longer_variable16)) 
+	{
+		dosomething();
+	}
+	
+}
+
+namespace Hint {			// 命名空间按此格式
+namespace Func {
+  
+void function1(void)
+{
+}
+ 
+// 函数定义间只能加一空行作为间隔，不能加多个空行
+void function2(void)
+{
+}
+ 
+void function3(void)
+{
+}
+ 
+} }	// namespace Hint::Func		// 必须要注释

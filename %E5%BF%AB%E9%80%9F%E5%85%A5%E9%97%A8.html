@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>内部资料 : 快速入门</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            内部资料 : 快速入门
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on 2014-08-27 by <font color="#0050B2">gaolj</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout" data-atlassian-layout="{&quot;name&quot;:&quot;pagelayout-two-simple&quot;,&quot;columns&quot;:[&quot;&quot;,&quot;&quot;]}"><div class="columnLayout twoColumns"><div class="cell "><div class="innerCell"><p><strong><span style="color: rgb(255,0,0);">良好的格式</span></strong></p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: cpp; gutter: false" style="font-size:12px;">int main
+{
+	bool b = true;	// 每行语句前用Tab缩进（不允许用空格来缩进）。Tab的大小为为4个空格
+	int i = 0;		// &quot;//&quot;的前面用Tab缩进（不允许用空格来缩进），后面加一空格，再写注释
+	int coutn = 0;	// 多行注释，&quot;//&quot;的前面尽量缩进对齐
+ 					// 变量声明结束后加空行以示强调
+	if (i &lt; 10)	   // if, for, while等关键字后加一空格
+	{
+		int *p = a; // ! ~ ++ -- * &amp;等单目运算符前后不加空格
+		i++;
+		--i;
+	}
+	else
+	{
+		return 0;	// 单条语句建议加括号
+	}
+ 					// 主要功能代码块间加空行，表示区分
+	for (i = 0; i &lt; 10; i++)	// 双目操作符前后加空格&gt; &lt; + = += &amp; &amp;&amp; || &lt;&lt; &gt;&gt;
+	{						 // &quot;;&quot;右加空格
+	}
+	
+	// 语句结束符号&#39;;&#39;后，如果没有注释，则不能有任何不可见字符（如：空格、tab）
+	point.x = 0;
+	point.y = 0;	// 每一行只准书写一条语句
+ 
+	// 此条注释表示下面代码段实现的逻辑
+	function1();	
+	function2();	
+
+	// 下面代码的注释要与上面的代码隔开
+	function3();
+ 
+	// 代码行不要过长
+	// 长表达式要在低优先级操作符处拆分成新行，操作符放在新行之首（以便突出操作符）
+	// 拆分出的新行要进行适当的缩进，使排版整齐，语句可读
+	if ((very_longer_variable1 &gt;= very_longer_variable12)
+		&amp;&amp; (very_longer_variable3 &lt;= very_longer_variable14)
+		&amp;&amp; (very_longer_variable5 &lt;= very_longer_variable16)) 
+	{
+		dosomething();
+	}
+	
+}
+
+namespace Hint {			// 命名空间按此格式
+namespace Func {
+  
+void function1(void)
+{
+}
+ 
+// 函数定义间只能加一空行作为间隔，不能加多个空行
+void function2(void)
+{
+}
+ 
+void function3(void)
+{
+}
+ 
+} }	// namespace Hint::Func		// 必须要注释</pre>
+</div></div><p> </p><p> </p></div></div><div class="cell "><div class="innerCell"><p><strong><span style="color: rgb(255,0,0);">不允许采用的格式</span></strong></p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: cpp; gutter: false" style="font-size:12px;">int main {		// java风格
+
+    bool b = true;    // 此行语句前用4个空格缩进
+	int i = 0;    // &quot;//&quot;前缩进用了4个空格
+	int coutn = 0;//多行注释没用Tab对齐，&quot;//&quot;后面没有空格，变量声明结束没加空行
+	if(i &lt; 10){	// if后没加空格
+		int * p = a;// 单目运算符*后加空格
+	}else					 // 单条语句没加括号
+		return 0;			 // 主要功能代码块间没有加空行
+	for (i=0;i&lt;10;i++){		// = &lt; 左右没有空格 ;右没有空格
+	}
+ 
+	point.x = 0;point.y = 0; // 多个短语句写在一行中
+	// 下面代码的注释没有与上面的代码隔开
+	function1();	
+	function2();	
+	
+}
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+// 以下二种不允许
+namespace Hint {namespace Func {
+ 
+namespace Hint {
+	namespace Func {
+
+
+ 
+	// 空间内的顶层定义不能有缩进
+	void function1(void)
+	{
+	}
+	// 函数定义间没有空行
+	void function2(void)
+	{
+	}
+ 
+ 
+// 函数定义间空行太多
+void function3(void)
+{
+}
+ 
+ 
+// 以下二种不允许，且没有注释
+}
+	}
+ 
+}
+}</pre>
+</div></div></div></div></div></div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/5472657/5701709.txt">TextFile3.txt</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/5472657/5701710.txt">TextFile1.txt</a> (text/plain)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://10.30.1.104:8090/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on 2015-10-30 12:39:14</small></p>
+            </div>
+        </div>     </body>
+</html>

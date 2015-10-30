@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>内部资料 : 第一讲--入门篇</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            内部资料 : 第一讲--入门篇
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on 2014-07-18 by <font color="#0050B2">gaolj</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="id-第一讲--入门篇-设计模式是什么"><span>设计模式是什么</span></h1><p><span>它是一套面向对象的代码设计理论，代码设计经验的总结，已经诞近20年了。</span></p><p><span><strong>谁提出的：</strong>由软件界的先辈们（The Gang of Four：包括Erich Gamma、Richard Helm、Ralph Johnson、John Vlissides）总结出的一套可以反复使用的经验。</span></p><p><span><strong>有什么作用：</strong>可以提高代码的可重用性，增强系统的可维护性，以及解决一系列的复杂问题。容易被他人理解，保证代码可靠性。我们可以分析现有的需求，预测可能发生的变更，但是我们不能控制需求的变更，灵活的应对需求的变更。</span></p><p><span style="font-size: 10.0pt;line-height: 13.0pt;">是一种开发思想，理论乃至哲学，它能指导你如何去设计一个优秀的架构、编写一段健壮的代码、解决一个复杂的需求。</span></p><p><span>因为它是软件行业的经验总结，因此它具有更广泛的适应性，不管你使用什么编程语言，不管你遇到什么业务类型，设计模式都可以自由地“侵入”。</span></p><p><span>简单的说，设计模式就是怎样对相关的类进行设计–拆分、组合</span></p><h1 id="id-第一讲--入门篇-设计模式与编程语言">设计模式与编程语言</h1><p><span style="color: rgb(0,0,0);">C++：stl，MFC，QT，boost，poco</span></p><p><span style="color: rgb(0,0,0);">Java：语言本身与设计<span>模式紧密关联，JDK，WEB开发中用到的各类框架struts、spring、hibernate等</span></span></p><h1 id="id-第一讲--入门篇-经典的23种设计模式"><span style="text-decoration: none;color: rgb(0,0,0);"><a href="http://blog.csdn.net/pigheadsam/article/details/2622877" style="text-decoration: none;" class="external-link" rel="nofollow"><span style="color: rgb(0,0,0);">经典的23种设计模式</span></a></span></h1><p class="list-dot list-dot-paddingleft"> </p><ol><li><strong>创建型模式</strong>：<span style="color: rgb(255,0,0);">单例模式</span>、抽象工厂模式、建造者模式、工厂模式、原型模式。</li><li><strong style="font-size: 10.0pt;line-height: 13.0pt;">结构型模式</strong><span style="font-size: 10.0pt;line-height: 13.0pt;">：适配器模式、桥接模式、装饰模式、组合模式、外观模式、享元模式、代理模式。</span></li><li><strong style="font-size: 10.0pt;line-height: 13.0pt;">行为型模式</strong><span style="font-size: 10.0pt;line-height: 13.0pt;">：模版方法模式、命令模式、迭代器模式、<span style="color: rgb(255,0,0);">观察者模式</span>、中介者模式、备忘录模式、解释器模式、状态模式、策略模式、职责链模式、访问者模式。</span></li></ol><h1 id="id-第一讲--入门篇-单例模式"><span style="color: rgb(0,0,0);">单例模式</span></h1><div class="reader-txt-layer"><div class="ie-fix"><p class="reader-word-layer reader-word-s8-3"><span>又叫单态模式或者单件模式，保证一个类仅有一个实例，并提供一个访问它的全局访问点。</span></p><p class="reader-word-layer reader-word-s8-3"><span><span style="color: rgb(0,0,0);">Singleton模式是做为&quot;全局变量&quot;的替代品，</span>代表那些本质上具有唯一性的系统组件，比如：数据库连接池、所有全局对象（配置文件、MFC theApp等等）</span></p><p class="reader-word-layer reader-word-s8-3"><span style="font-size: 10.0pt;line-height: 13.0pt;"><span style="color: rgb(0,0,0);"> </span><a href="http://www.baidu.com/s?tn=maxthon2&amp;ch=3&amp;wd=C%2B%2B%20Singleton&amp;ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;rsv_spt=1&amp;rsv_sug3=3&amp;rsv_sug4=75&amp;rsv_sug1=3&amp;inputT=1284&amp;bs=C%2B%2B%20poco%20Singleton" class="external-link" rel="nofollow"><span style="color: rgb(0,0,0);">Singleton </span>C++的实现</a>，有一定难度</span><span style="color: rgb(0,0,0);">（Double Checked Locking）模式</span><span style="font-size: 10.0pt;line-height: 13.0pt;">，现有的实现：poco </span><span style="color: rgb(0,0,0);">SingletonHolder</span></p><p class="reader-word-layer reader-word-s8-3"><span style="color: rgb(0,0,0);"> </span></p></div></div><h1 id="id-第一讲--入门篇-观察者模式"><span style="color: rgb(0,0,0);">观察者模式</span></h1><p>发布--订阅</p><ol><li>在RSS网站上订阅自己感兴趣的内容。</li><li>温度监测站，温度变化</li><li>程序配置，配置变化后的通知</li><li>多文档视图，一份数据，多个视图</li></ol><p>实例：自动停车场监视器</p><p>一个电子门gate 类，它获取哪辆车（carID）是进入还是离开停车场</p><p>如果有车试图进行欺骗时会触发警报，监视器会通知警卫security_guard</p><p>一个自动停车场监视器，有车进入或离开停车场，监视器将收到一个通知，知道是哪辆车（carID）进入还是离开</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">class car
+{
+	string m_carID;
+};
+// 电子门
+class gate
+{
+public:
+	void enter(string carID);
+	void leave(string carID);
+};
+// 警卫
+class security_guard
+{
+public:
+	void 拦截();
+	void 放行();
+	void observe(parkinglot_guard plg);
+};
+// 停车场监视器
+class parkinglot_guard
+{
+public:
+	void observe(gate gt);	// 观察电子门的状态
+	vector&lt;car&gt; m_cars;
+};
+int main()
+{
+	// 创建3个警卫
+	std::vector&lt;security_guard&gt; security_guards;
+	security_guards.push_back(&quot;Bill&quot;);
+	security_guards.push_back(&quot;Bob&quot;);
+	security_guards.push_back(&quot;Bull&quot;);
+	// 创建2个门
+	gate gate1;
+	gate gate2;
+	// 创建自动监视器
+	parkinglot_guard plg;
+	// 把自动监视器连接到门上
+	plg.observe(gate1);
+	plg.observe(gate2);
+	// 把警卫连接到自动监视器上
+	for (unsigned int i=0;i&lt;security_guards.size();++i)
+	{
+		security_guards[i].observe(plg);
+	}
+	// 模拟车进入
+	std::cout &lt;&lt; &quot;A couple of cars enter...\n&quot;;
+	gate1.enter(&quot;SLN 123&quot;);
+	gate2.enter(&quot;RFD 444&quot;);
+	gate2.enter(&quot;IUY 897&quot;);
+	// 模拟车离开
+	std::cout &lt;&lt; &quot;\nA couple of cars leave...\n&quot;;
+	gate1.leave(&quot;IUY 897&quot;);
+	gate1.leave(&quot;SLN 123&quot;);
+	// 模拟车进入二次
+	std::cout &lt;&lt; &quot;\nSomeone is entering twice - or is it a stolen license plate?\n&quot;;
+	gate1.enter(&quot;RFD 444&quot;);
+}
+
+</pre>
+</div></div><p> </p><h1 id="id-第一讲--入门篇-6大设计原则">6大设计原则</h1><p><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);"><span>面向对象有几个原则：</span></span></span></p><ol><li><span style="color: rgb(0,0,0);"><a href="http://baike.baidu.com/view/866233.htm" style="text-decoration: none;" class="external-link" rel="nofollow"><span style="color: rgb(0,0,0);">开闭原则</span></a></span>（Open Closed Principle，OCP）、</li><li><span style="color: rgb(0,0,0);"><a href="http://baike.baidu.com/view/1638361.htm" style="text-decoration: none;" class="external-link" rel="nofollow"><span style="color: rgb(0,0,0);">里氏代换原则</span></a></span>（Liskov Substitution Principle，LSP）、</li><li><span style="color: rgb(0,0,0);"><a href="http://baike.baidu.com/view/1996652.htm" style="text-decoration: none;" class="external-link" rel="nofollow"><span style="color: rgb(0,0,0);">依赖倒转原则</span></a></span>（Dependency Inversion Principle，DIP）、</li><li><span style="color: rgb(0,0,0);"><a href="http://baike.baidu.com/view/1638378.htm" style="text-decoration: none;" class="external-link" rel="nofollow"><span style="color: rgb(0,0,0);">接口隔离原则</span></a></span>（Interface Segregation Principle，ISP）、</li><li>合成/聚合复用原则（Composite/Aggregate Reuse Principle，CARP）、</li><li>最小知识原则（Principle of Least Knowledge，PLK，也叫迪米特法则）。</li></ol><h1 id="id-第一讲--入门篇-经典著作">经典著作</h1><p><span>GOF的《Design Patterns》 经典之作</span></p><p><span><span>《Head First Design Patterns》--<span>《深入浅出设计模式》</span></span></span></p><h1 id="id-第一讲--入门篇-参考"><span><span><span>参考</span></span></span></h1><p>C++ Singleton的实现  <a href="http://www.baidu.com/s?tn=maxthon2&amp;ch=3&amp;wd=C%2B%2B%20Singleton&amp;ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;rsv_spt=1&amp;rsv_sug3=3&amp;rsv_sug4=75&amp;rsv_sug1=3&amp;inputT=1284&amp;bs=C%2B%2B%20poco%20Singleton" class="external-link" rel="nofollow">http://www.baidu.com/s?tn=maxthon2&amp;ch=3&amp;wd=C%2B%2B%20Singleton&amp;ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;rsv_spt=1&amp;rsv_sug3=3&amp;rsv_sug4=75&amp;rsv_sug1=3&amp;inputT=1284&amp;bs=C%2B%2B%20poco%20Singleton</a></p><p><a href="http://baike.baidu.com/view/66964.htm?fr=aladdin#2" class="external-link" rel="nofollow">http://baike.baidu.com/view/66964.htm?fr=aladdin#2</a></p><p><a href="http://blog.csdn.net/heiqishi88/article/details/6318937" class="external-link" rel="nofollow">http://blog.csdn.net/heiqishi88/article/details/6318937</a></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://10.30.1.104:8090/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on 2015-10-30 12:39:21</small></p>
+            </div>
+        </div>     </body>
+</html>
